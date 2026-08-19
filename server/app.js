@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("node:path");
 const passport = require("passport");
-const usersRouter = require("./routes/usersRouter");
+const authRouter = require("./routes/authRouter");
 const postsRouter = require("./routes/postsRouter");
 const commentsRouter = require("./routes/commentsRouter");
 
@@ -13,7 +13,7 @@ app.get("/", (req, res) =>
   res.json({ message: "API is online and working perfectly!" }),
 );
 
-app.use("/users", usersRouter);
+app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/comments", commentsRouter);
 
