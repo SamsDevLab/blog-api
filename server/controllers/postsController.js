@@ -1,7 +1,9 @@
+const postsModel = require("../models/postsModel");
+
 async function getAllPosts(req, res) {
-  res.json({
-    message: "return all posts!",
-  });
+  // res.json({
+  //   message: "return all posts!",
+  // });
 }
 
 async function getPost(req, res) {
@@ -11,9 +13,14 @@ async function getPost(req, res) {
   });
 }
 
-async function addNewPost(req, res) {
+async function createNewPost(req, res) {
+  const { authorId, content, title } = req.body;
+  const newPostData = { authorId, content, title };
+
+  const newPost = await postsModel.insertPost(newPostData);
+
   res.json({
-    message: "Added new post!",
+    newPost: newPost,
   });
 }
 
@@ -40,7 +47,7 @@ async function deletePost(req, res) {
 module.exports = {
   getAllPosts,
   getPost,
-  addNewPost,
+  createNewPost,
   addNewCommentToPost,
   updatePost,
   deletePost,
