@@ -1,5 +1,20 @@
 const prisma = require("../lib/prisma");
 
+async function queryAllPosts() {
+  const allPosts = await prisma.post.findMany();
+  return allPosts;
+}
+
+async function queryPost(postId) {
+  const targetedPost = await prisma.post.findUnique({
+    where: {
+      id: postId,
+    },
+  });
+
+  return targetedPost;
+}
+
 async function insertPost(newPostData) {
   const { authorId, title, content } = newPostData;
 
@@ -14,4 +29,35 @@ async function insertPost(newPostData) {
   return newPost;
 }
 
-module.exports = { insertPost };
+async function updatePost(updatePostData) {
+  const { postId, content } = updatePostData;
+
+  const updatedPost = await prisma.post.update({
+    where: {
+      id: +postId,
+    },
+    data: {
+      content,
+    },
+  });
+
+  return updatedPost;
+}
+
+async function deletePost(postId) {
+  const deletedPost = await prisma.post.delete({
+    where: {
+      id: +postId,
+    },
+  });
+
+  return deletedPost;
+}
+
+module.exports = {
+  queryAllPosts,
+  queryPost,
+  insertPost,
+  updatePost,
+  deletePost,
+};

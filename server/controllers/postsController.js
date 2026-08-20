@@ -1,15 +1,20 @@
 const postsModel = require("../models/postsModel");
+const commentsModel = require("../models/commentsModel");
 
 async function getAllPosts(req, res) {
-  // res.json({
-  //   message: "return all posts!",
-  // });
+  const allPosts = await postsModel.queryAllPosts();
+
+  res.json({
+    allPosts,
+  });
 }
 
 async function getPost(req, res) {
-  const postId = req.params.postId;
+  const postId = +req.params.postId;
+  const targetedPost = await postsModel.queryPost(postId);
+
   res.json({
-    message: `Get post ${postId}`,
+    targetedPost,
   });
 }
 
@@ -20,27 +25,42 @@ async function createNewPost(req, res) {
   const newPost = await postsModel.insertPost(newPostData);
 
   res.json({
-    newPost: newPost,
+    newPost,
   });
 }
 
 async function addNewCommentToPost(req, res) {
+  const { authorId, content } = req.body;
+  const { postId } = req.params;
+  const newCommentData = { authorId, content, postId };
+
+  const newComment = await commentsModel.insertComment(newCommentData);
+
   res.json({
-    message: "Adding new comment to post!",
+    newComment,
   });
 }
 
 async function updatePost(req, res) {
-  const postId = req.params.postId;
+  const { content } = req.body;
+  const { postId } = req.params;
+  const updatePostData = { content, postId };
+
+  const updatedPost = await postsModel.updatePost(updatePostData);
+
   res.json({
-    message: `Updated post ${postId}!`,
+    updatedPost,
   });
 }
 
 async function deletePost(req, res) {
   const postId = req.params.postId;
+
+  const deletedPost = await postsModel.deletePost(postId);
+
   res.json({
-    message: `Delete post ${postId}`,
+    message: "This post was deleted!",
+    post: deletedPost,
   });
 }
 
