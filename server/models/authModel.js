@@ -1,10 +1,11 @@
 const prisma = require("../lib/prisma");
 
-async function addUser(req, res) {
+async function addUser(newUserFields) {
   const newUser = await prisma.user.create({
     data: {
-      email: req.body.email,
-      username: req.body.username,
+      email: newUserFields.email,
+      username: newUserFields.username,
+      blog_author: JSON.parse(newUserFields.blogAuthor),
     },
   });
   return newUser;
