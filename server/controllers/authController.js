@@ -1,9 +1,8 @@
 const authModel = require("../models/authModel");
 
 async function createNewUser(req, res) {
-  const { username, email, blogAuthor } = req.body;
-  const newUserFields = { username, email, blogAuthor };
-  const newUser = await authModel.addUser(newUserFields);
+  const { passwordConfirmation, ...newUserData } = req.body;
+  const newUser = await authModel.addUser(newUserData);
   res.json({
     user: newUser,
   });
