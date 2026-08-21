@@ -8,6 +8,12 @@ const validateUserSignup = [
     .withMessage("Email cannot be empty")
     .isEmail()
     .withMessage("Must be a valid email address"),
+  body("username")
+    .trim()
+    .isLength(1)
+    .withMessage("Username cannot be empty")
+    .isLength({ min: 3, max: 20 })
+    .withMessage("Username must be between 3 and 20 characters"),
   body("password")
     .trim()
     .isLength(1)
