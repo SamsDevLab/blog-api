@@ -16,6 +16,7 @@ model User {
   id          Int       @id @default(autoincrement())
   email       String    @unique
   username    String
+  password    String
   blog_author Boolean   @default(false)
   posts       Post[]
   comments    Comment[]
