@@ -5,6 +5,7 @@ const passport = require("passport");
 const authRouter = require("./routes/authRouter");
 const postsRouter = require("./routes/postsRouter");
 const commentsRouter = require("./routes/commentsRouter");
+const errorHandler = require("./middleware/errorHandler");
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +17,8 @@ app.get("/", (req, res) =>
 app.use("/auth", authRouter);
 app.use("/posts", postsRouter);
 app.use("/comments", commentsRouter);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
