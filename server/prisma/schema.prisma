@@ -17,7 +17,7 @@ model User {
   email       String    @unique
   username    String
   password    String
-  blog_author Boolean   @default(false)
+  blogAuthor Boolean   @default(false) @map("blog_author")
   posts       Post[]
   comments    Comment[]
 }
