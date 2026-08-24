@@ -10,6 +10,9 @@ const errorHandler = require("./middleware/errorHandler");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
+require("./config/passport-local")(passport);
+require("./config/passport-jwt")(passport);
+
 app.get("/", (req, res) =>
   res.json({ message: "API is online and working perfectly!" }),
 );
