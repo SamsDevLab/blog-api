@@ -6,25 +6,25 @@ module.exports = function (passport) {
   passport.use(
     new LocalStrategy(
       { usernameField: "email", passwordField: "password" },
-      async (email, password, done) => {
+      async (submittedEmail, submittedPassword, done) => {
         try {
           const user = await prisma.user.findUnique({
-            where: {
-              email,
-            },
+            where: { email: submittedEmail },
           });
 
           if (!user) {
-            return done(null, false, { message: "Incorrect email!" });
+            return done(null, false, { message: "Incorrect email" });
           }
 
-          const match = await bcrypt.compare(password, user.password);
+          const match = await bcrypt.compare(submittedPassword, user.password);
 
           if (!match) {
-            return done(null, false, { message: "Incorrect password!" });
+            return done(null, false, { message: "Incorrect password" });
           }
 
-          return done(null, user.id);
+          const { id } = user;
+
+          return done(null, id);
         } catch (error) {
           return done(error);
         }
