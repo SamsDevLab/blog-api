@@ -1,0 +1,21 @@
+.signupForm {
+  display: flex;
+  flex-direction: column;
+  min-width: 60%;
+  justify-self: center;
+  background-color: antiquewhite;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.2rem;
+}
+
+.signupInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.signupButtonContainer {
+  display: flex;
+  gap: 0.3rem;
+}
