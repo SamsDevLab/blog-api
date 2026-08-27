@@ -1,16 +1,17 @@
-// import { useState } from "react";
+import { useState } from "react";
 
 import "./App.css";
-import styles from "./App.module.css";
 import Header from "./Components/Header/Header.jsx";
-import MainContent from "./Components/MainContent/MainContent.jsx";
 import Footer from "./Components/Footer/Footer.jsx";
+import { Outlet } from "react-router";
 
 function App() {
   return (
     <div class="app-container">
       <Header />
-      <MainContent />
+      <main class="main-content">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );
