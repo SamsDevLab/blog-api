@@ -1,0 +1,10 @@
+.header {
+  background-color: lightblue;
+  flex: none;
+  padding: 2rem;
+}
+
+.header h1 {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
