@@ -7,4 +7,12 @@
 
 .main-content {
   flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.main-container {
+  min-width: 50%;
+  background-color: deepskyblue;
+  padding: 1rem;
 }

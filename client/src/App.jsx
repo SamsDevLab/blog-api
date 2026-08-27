@@ -10,7 +10,9 @@ function App() {
     <div class="app-container">
       <Header />
       <main class="main-content">
-        <Outlet />
+        <div class="main-container">
+          <Outlet />
+        </div>
       </main>
       <Footer />
     </div>
