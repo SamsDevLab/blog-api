@@ -45,3 +45,7 @@ button,
 select {
   font: inherit;
 }
+
+#root {
+  min-height: 100vh;
+}
