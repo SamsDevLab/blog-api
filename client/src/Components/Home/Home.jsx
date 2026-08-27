@@ -2,9 +2,10 @@ import styles from "../Home/Home.module.css";
 
 const Home = () => {
   return (
-    <main class={styles.main}>
-      <h2>This is where the blog posts will live!</h2>
-    </main>
+    <div>
+      <h2>Bloggin'</h2>
+      <h3>Blog posts will live here!</h3>
+    </div>
   );
 };
 
