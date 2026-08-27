@@ -1,6 +1,6 @@
-import styles from "../MainContent/MainContent.module.css";
+import styles from "../Home/Home.module.css";
 
-const MainContent = () => {
+const Home = () => {
   return (
     <main class={styles.main}>
       <h2>This is where the blog posts will live!</h2>
@@ -8,4 +8,4 @@ const MainContent = () => {
   );
 };
 
-export default MainContent;
+export default Home;
