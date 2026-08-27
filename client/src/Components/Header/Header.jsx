@@ -4,7 +4,9 @@ import { Link } from "react-router";
 const Header = () => {
   return (
     <header class={styles.header}>
-      <h1>Sam's Dev Blog</h1>
+      <h1>
+        <Link to="/">Sam's Dev Blog</Link>
+      </h1>
       <nav class={styles.navBar}>
         <ul>
           <li>
