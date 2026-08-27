@@ -2,9 +2,30 @@
   background-color: lightblue;
   flex: none;
   padding: 2rem;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .header h1 {
   font-weight: bold;
   font-size: 1.5rem;
+}
+
+.navBar {
+  display: flex;
+  align-items: center;
+}
+
+.navBar ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.navBar li {
+  list-style-type: none;
+}
+
+.navBar a {
+  text-decoration: none;
+  color: green;
 }
