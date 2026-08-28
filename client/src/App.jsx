@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import "./App.css";
 import Header from "./Components/Header/Header.jsx";
@@ -9,8 +9,8 @@ function App() {
   return (
     <div class="app-container">
       <Header />
-      <main class="main-content">
-        <div class="main-container">
+      <main className="main-content">
+        <div className="main-container">
           <Outlet />
         </div>
       </main>
