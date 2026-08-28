@@ -2,6 +2,7 @@ const router = require("express").Router();
 const postsController = require("../controllers/postsController");
 
 router.get("/", postsController.getAllPosts); //done
+router.get("/published", postsController.getAllPublishedPosts);
 router.get("/:postId", postsController.getPost); // done
 
 router.post("/", postsController.createNewPost); // needs a middleware to verify if the user is a blog author or not. if not, this will be rejected

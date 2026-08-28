@@ -5,6 +5,16 @@ async function queryAllPosts() {
   return allPosts;
 }
 
+async function queryAllPublishedPosts() {
+  const allPublishedPosts = await prisma.post.findMany({
+    where: {
+      published: true,
+    },
+  });
+
+  return allPublishedPosts;
+}
+
 async function queryPost(postId) {
   const targetedPost = await prisma.post.findUnique({
     where: {
@@ -56,6 +66,7 @@ async function deletePost(postId) {
 
 module.exports = {
   queryAllPosts,
+  queryAllPublishedPosts,
   queryPost,
   insertPost,
   updatePost,

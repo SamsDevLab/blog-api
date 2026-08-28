@@ -9,6 +9,14 @@ async function getAllPosts(req, res) {
   });
 }
 
+async function getAllPublishedPosts(req, res) {
+  const allPublishedPosts = await postsModel.queryAllPublishedPosts();
+
+  res.json({
+    allPublishedPosts,
+  });
+}
+
 async function getPost(req, res) {
   const postId = +req.params.postId;
   const targetedPost = await postsModel.queryPost(postId);
@@ -66,6 +74,7 @@ async function deletePost(req, res) {
 
 module.exports = {
   getAllPosts,
+  getAllPublishedPosts,
   getPost,
   createNewPost,
   addNewCommentToPost,
