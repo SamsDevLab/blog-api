@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const path = require("node:path");
 const passport = require("passport");
+const cors = require("cors");
 const authRouter = require("./routes/authRouter");
 const postsRouter = require("./routes/postsRouter");
 const commentsRouter = require("./routes/commentsRouter");
@@ -9,6 +10,7 @@ const errorHandler = require("./middleware/errorHandler");
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ origin: "http://localhost:5173" }));
 
 require("./config/passport-local")(passport);
 require("./config/passport-jwt")(passport);
