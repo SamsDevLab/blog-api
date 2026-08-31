@@ -9,6 +9,7 @@ const commentsRouter = require("./routes/commentsRouter");
 const errorHandler = require("./middleware/errorHandler");
 
 app.use(express.static("public"));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: "http://localhost:5173" }));
 
