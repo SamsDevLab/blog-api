@@ -10,13 +10,16 @@ router.post("/login", (req, res, next) => {
   passport.authenticate("local", { session: false }, (err, user, info) => {
     if (err) return next(err);
 
-    if (!user) return res.status(400).json({ message: "Login failed", info });
-
-    jwt.sign({ user }, process.env.SECRET_KEY, (err, token) => {
-      res.json({
-        token,
+    if (user === false) {
+      const { errorMessage } = info;
+      return res.status(400).json({ errorMessage });
+    } else {
+      jwt.sign({ user }, process.env.SECRET_KEY, (err, token) => {
+        return res.json({
+          token,
+        });
       });
-    });
+    }
   })(req, res, next);
 });
 
