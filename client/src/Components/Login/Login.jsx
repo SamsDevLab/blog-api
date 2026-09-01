@@ -1,7 +1,10 @@
 import styles from "../Login/Login.module.css";
+import { useState } from "react";
 import { Link } from "react-router";
 
 const Login = () => {
+  const [loginError, setLoginError] = useState(null);
+
   async function handleSubmit(formData) {
     const userData = Object.fromEntries(formData);
     const response = await fetch("http://localhost:3000/auth/login", {
@@ -12,14 +15,19 @@ const Login = () => {
       body: JSON.stringify(userData),
     });
 
-    const { token } = await response.json();
+    const result = await response.json();
 
-    localStorage.setItem("token", token);
+    if (Object.hasOwn(result, "errorMessage")) {
+      setLoginError(result.errorMessage);
+    } else if (Object.hasOwn(result, "token")) {
+      localStorage.setItem("token", result.token);
+    }
   }
 
   return (
     <form className={styles.loginForm} action={handleSubmit}>
       <h2>Login</h2>
+      {loginError !== null && <h3>{loginError}</h3>}
       <div className={styles.loginInputContainer}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" />
