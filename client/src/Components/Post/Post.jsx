@@ -1,13 +1,11 @@
 import styles from "../Post/Post.module.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router";
 import Comments from "../Comments/Comments";
 
 const Post = () => {
   const { postId } = useParams();
   const [selectedPost, setPost] = useState(null);
-  const [postComments, setPostComments] = useState(null);
   const [token] = useState(() => localStorage.getItem("token"));
 
   useEffect(() => {
@@ -47,8 +45,8 @@ const Post = () => {
         },
       );
       if (response.ok === true) {
-        const commentsArr = await response.json();
-        setPostComments(commentsArr);
+        // const commentsArr = await response.json();
+        // setPostComments(commentsArr);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -74,7 +72,10 @@ const Post = () => {
                 : "No date available"}
             </h3>
             <p>{selectedPost.content}</p>
-            <Comments onFormSubmit={handleCommentSubmission} />
+            <Comments
+              comments={selectedPost.comments}
+              onFormSubmit={handleCommentSubmission}
+            />
           </>
         )}
       </div>
