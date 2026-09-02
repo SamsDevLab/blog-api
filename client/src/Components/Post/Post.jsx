@@ -6,11 +6,18 @@ import { Link } from "react-router";
 const Post = () => {
   const { postId } = useParams();
   const [selectedPost, setPost] = useState(null);
+  const [token] = useState(() => localStorage.getItem("token"));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/${postId}`);
+        const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (response.ok === true) {
           const postObject = await response.json();
           setPost(postObject.targetedPost);
@@ -20,10 +27,8 @@ const Post = () => {
       }
     };
 
-    fetchData();
-  }, [postId]);
-
-  // console.log(selectedPost);
+    if (token !== null) fetchData();
+  }, [postId, token]);
 
   return (
     <div className={styles.postContainer}>
@@ -44,22 +49,22 @@ const Post = () => {
                 : "No date available"}
             </h3>
             <p>{selectedPost.content}</p>
+            <div className={styles.commentContainer}>
+              <form action="" method="" className={styles.commentForm}>
+                <div className={styles.commentInput}>
+                  <label htmlFor="comment">Comment on Post</label>
+                  <input type="textarea" id="comment" name="comment" />
+                </div>
+                <div className={styles.commentButtonContainer}>
+                  <button>
+                    <Link to="/">Back</Link>
+                  </button>
+                  <button>Submit</button>
+                </div>
+              </form>
+            </div>
           </>
         )}
-      </div>
-      <div className={styles.commentContainer}>
-        <form action="" method="" className={styles.commentForm}>
-          <div className={styles.commentInput}>
-            <label htmlFor="comment">Comment on Post</label>
-            <input type="textarea" id="comment" name="comment" />
-          </div>
-          <div className={styles.commentButtonContainer}>
-            <button>
-              <Link to="/">Back</Link>
-            </button>
-            <button>Submit</button>
-          </div>
-        </form>
       </div>
     </div>
   );
