@@ -45,8 +45,9 @@ const Post = () => {
         },
       );
       if (response.ok === true) {
-        // const commentsArr = await response.json();
-        // setPostComments(commentsArr);
+        const result = await response.json();
+        const { updatedPost } = result;
+        setPost(updatedPost);
       }
     } catch (error) {
       console.error("Error:", error);

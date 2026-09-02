@@ -38,14 +38,10 @@ async function createNewPost(req, res) {
 }
 
 async function addNewCommentToPost(req, res) {
-  const { authorId, content } = req.body;
-  const { postId } = req.params;
-  const newCommentData = { authorId, content, postId };
-
-  const newComment = await commentsModel.insertComment(newCommentData);
+  const updatedPost = await commentsModel.insertComment(req);
 
   res.json({
-    newComment,
+    updatedPost,
   });
 }
 

@@ -1,17 +1,22 @@
+const postsModel = require("../models/postsModel");
 const prisma = require("../lib/prisma");
 
-async function insertComment(newCommentData) {
-  const { authorId, content, postId } = newCommentData;
+async function insertComment(req) {
+  const authorId = req.user.id;
+  const postId = Number(req.params.postId);
+  const { content } = req.body;
 
-  const newComment = await prisma.comment.create({
+  await prisma.comment.create({
     data: {
-      authorId: +authorId,
+      authorId,
+      postId,
       content,
-      postId: +postId,
     },
   });
 
-  return newComment;
+  const updatedPost = await postsModel.queryPost(postId);
+
+  return updatedPost;
 }
 
 async function updateComment(editCommentData) {
