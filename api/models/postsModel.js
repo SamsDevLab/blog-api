@@ -20,6 +20,26 @@ async function queryPost(postId) {
     where: {
       id: postId,
     },
+    select: {
+      title: true,
+      content: true,
+      author: {
+        select: {
+          username: true,
+        },
+      },
+      createdAt: true,
+      updatedAt: true,
+      comments: {
+        include: {
+          author: {
+            select: {
+              username: true,
+            },
+          },
+        },
+      },
+    },
   });
 
   return targetedPost;
