@@ -1,8 +1,13 @@
 const router = require("express").Router();
 const postsController = require("../controllers/postsController");
+const passport = require("passport");
 
-router.get("/", postsController.getAllPosts); //done
-router.get("/published", postsController.getAllPublishedPosts);
+router.get("/", postsController.getAllPosts);
+router.get(
+  "/published",
+  passport.authenticate("jwt", { session: false }),
+  postsController.getAllPublishedPosts,
+);
 router.get("/:postId", postsController.getPost); // done
 
 router.post("/", postsController.createNewPost); // needs a middleware to verify if the user is a blog author or not. if not, this will be rejected
