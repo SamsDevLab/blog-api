@@ -2,10 +2,12 @@ import styles from "../Post/Post.module.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router";
+import Comments from "../Comments/Comments";
 
 const Post = () => {
   const { postId } = useParams();
   const [selectedPost, setPost] = useState(null);
+  const [postComments, setPostComments] = useState(null);
   const [token] = useState(() => localStorage.getItem("token"));
 
   useEffect(() => {
@@ -30,6 +32,29 @@ const Post = () => {
     if (token !== null) fetchData();
   }, [postId, token]);
 
+  async function handleCommentSubmission(formData) {
+    const comment = Object.fromEntries(formData);
+    try {
+      const response = await fetch(
+        `http://localhost:3000/posts/${postId}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(comment),
+        },
+      );
+      if (response.ok === true) {
+        const commentsArr = await response.json();
+        setPostComments(commentsArr);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   return (
     <div className={styles.postContainer}>
       <div className={styles.postContent}>
@@ -49,20 +74,7 @@ const Post = () => {
                 : "No date available"}
             </h3>
             <p>{selectedPost.content}</p>
-            <div className={styles.commentContainer}>
-              <form action="" method="" className={styles.commentForm}>
-                <div className={styles.commentInput}>
-                  <label htmlFor="comment">Comment on Post</label>
-                  <input type="textarea" id="comment" name="comment" />
-                </div>
-                <div className={styles.commentButtonContainer}>
-                  <button>
-                    <Link to="/">Back</Link>
-                  </button>
-                  <button>Submit</button>
-                </div>
-              </form>
-            </div>
+            <Comments onFormSubmit={handleCommentSubmission} />
           </>
         )}
       </div>

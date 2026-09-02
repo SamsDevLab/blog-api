@@ -1,0 +1,32 @@
+.commentContainer {
+  background-color: whitesmoke;
+  padding: 1rem;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.commentInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.commentButtonContainer {
+  display: flex;
+  gap: 1rem;
+}
+
+.commentButtonContainer button {
+  padding: 0.5rem;
+  background-color: skyblue;
+  border: none;
+}
+
+.commentButtonContainer button:hover {
+  cursor: pointer;
+}
