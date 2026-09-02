@@ -4,11 +4,18 @@ import { Link } from "react-router";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
+  const [token] = useState(() => localStorage.getItem("token"));
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/posts/published");
+        const response = await fetch("http://localhost:3000/posts/published", {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
         if (response.ok === true) {
           const postObject = await response.json();
           setPosts(postObject.allPublishedPosts);
@@ -18,8 +25,8 @@ const Home = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (token !== null) fetchData();
+  }, [token]);
 
   return (
     <div>
