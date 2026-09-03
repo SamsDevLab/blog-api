@@ -35,17 +35,18 @@ async function updateComment(editCommentData) {
   return updatedComment;
 }
 
-async function deleteComment(deleteCommentData) {
-  const { authorId, commentId } = deleteCommentData;
-
+async function deleteComment(commentId, req) {
   const deletedComment = await prisma.comment.delete({
     where: {
-      id: +commentId,
-      authorId: +authorId,
+      id: commentId,
     },
   });
 
-  return deletedComment;
+  const { postId } = deletedComment;
+
+  const updatedPost = await postsModel.queryPost(postId, req);
+
+  return updatedPost;
 }
 
 module.exports = { insertComment, updateComment, deleteComment };
