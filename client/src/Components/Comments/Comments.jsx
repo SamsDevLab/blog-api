@@ -1,15 +1,23 @@
 import styles from "../Comments/Comments.module.css";
 import { Link } from "react-router";
 
-const Comments = ({ comments, onFormSubmit }) => {
+const Comments = ({ loggedInUserId, comments, onFormSubmit }) => {
   return (
     <div className={styles.commentContainer}>
       {comments.map((comment) => {
+        // console.log(typeof loggedInUserId);
+        // console.log(typeof comment.authorId);
         return (
           <div key={comment.id} className={styles.comment}>
             <h3>{comment.author.username}</h3>
             <h4>{`${new Date(comment.createdAt).toLocaleString()}`}</h4>
             <p>{comment.content}</p>
+            {loggedInUserId === comment.authorId && (
+              <div>
+                <button>Edit</button>
+                <button>Delete</button>
+              </div>
+            )}
           </div>
         );
       })}

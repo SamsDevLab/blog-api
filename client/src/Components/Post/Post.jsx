@@ -74,6 +74,7 @@ const Post = () => {
             </h3>
             <p>{selectedPost.content}</p>
             <Comments
+              loggedInUserId={selectedPost.loggedInUserId}
               comments={selectedPost.comments}
               onFormSubmit={handleCommentSubmission}
             />
