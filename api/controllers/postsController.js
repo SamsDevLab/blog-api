@@ -19,7 +19,7 @@ async function getAllPublishedPosts(req, res) {
 
 async function getPost(req, res) {
   const postId = +req.params.postId;
-  const targetedPost = await postsModel.queryPost(postId);
+  const targetedPost = await postsModel.queryPost(postId, req);
 
   res.json({
     targetedPost,

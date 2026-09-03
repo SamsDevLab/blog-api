@@ -14,7 +14,7 @@ async function insertComment(req) {
     },
   });
 
-  const updatedPost = await postsModel.queryPost(postId);
+  const updatedPost = await postsModel.queryPost(postId, req);
 
   return updatedPost;
 }

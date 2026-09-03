@@ -15,7 +15,8 @@ async function queryAllPublishedPosts() {
   return allPublishedPosts;
 }
 
-async function queryPost(postId) {
+async function queryPost(postId, req) {
+  const loggedInUserId = req.user.id;
   const targetedPost = await prisma.post.findUnique({
     where: {
       id: postId,
@@ -42,7 +43,9 @@ async function queryPost(postId) {
     },
   });
 
-  return targetedPost;
+  const postWithCurrentUser = { loggedInUserId, ...targetedPost };
+
+  return postWithCurrentUser;
 }
 
 async function insertPost(newPostData) {
