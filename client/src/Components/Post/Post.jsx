@@ -54,6 +54,29 @@ const Post = () => {
     }
   }
 
+  async function handleCommentDeletion(comment) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/comments/${comment.id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(comment),
+        },
+      );
+      if (response.ok === true) {
+        const result = await response.json();
+        const { updatedPost } = result;
+        setPost(updatedPost);
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
+
   return (
     <div className={styles.postContainer}>
       <div className={styles.postContent}>
@@ -76,7 +99,8 @@ const Post = () => {
             <Comments
               loggedInUserId={selectedPost.loggedInUserId}
               comments={selectedPost.comments}
-              onFormSubmit={handleCommentSubmission}
+              onCommentSubmission={handleCommentSubmission}
+              onCommentDeletion={handleCommentDeletion}
             />
           </>
         )}
