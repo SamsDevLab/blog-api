@@ -13,7 +13,9 @@ async function addUser(newUserData) {
     },
   });
 
-  return newUser;
+  if (newUser) {
+    return true;
+  } else return false;
 }
 
 module.exports = { addUser };
