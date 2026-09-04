@@ -2,6 +2,11 @@ import styles from "../Post/Post.module.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Comments from "../Comments/Comments";
+import {
+  fetchPostById,
+  addCommentToPost,
+  deleteCommentFromPost,
+} from "../../services/postService";
 
 const Post = () => {
   const { postId } = useParams();
@@ -11,13 +16,8 @@ const Post = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/posts/${postId}`, {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetchPostById(postId, token);
+
         if (response.ok === true) {
           const postObject = await response.json();
           setPost(postObject.targetedPost);
@@ -33,17 +33,7 @@ const Post = () => {
   async function handleCommentSubmission(formData) {
     const comment = Object.fromEntries(formData);
     try {
-      const response = await fetch(
-        `http://localhost:3000/posts/${postId}/comments`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(comment),
-        },
-      );
+      const response = await addCommentToPost(postId, token, comment);
       if (response.ok === true) {
         const result = await response.json();
         const { updatedPost } = result;
@@ -56,17 +46,7 @@ const Post = () => {
 
   async function handleCommentDeletion(comment) {
     try {
-      const response = await fetch(
-        `http://localhost:3000/comments/${comment.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(comment),
-        },
-      );
+      const response = await deleteCommentFromPost(comment, token);
       if (response.ok === true) {
         const result = await response.json();
         const { updatedPost } = result;

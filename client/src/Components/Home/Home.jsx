@@ -1,7 +1,7 @@
 import styles from "../Home/Home.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { fetchPublicPosts } from "../../services/postService";
+import { fetchAllPublicPosts } from "../../services/postService";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetchPublicPosts(token);
+        const response = await fetchAllPublicPosts(token);
         if (response.ok === true) {
           const postObject = await response.json();
           setPosts(postObject.allPublishedPosts);
