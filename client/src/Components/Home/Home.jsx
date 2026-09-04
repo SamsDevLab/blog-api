@@ -1,6 +1,7 @@
 import styles from "../Home/Home.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
+import { fetchPublicPosts } from "../../services/postService";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
@@ -9,13 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/posts/published", {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetchPublicPosts(token);
         if (response.ok === true) {
           const postObject = await response.json();
           setPosts(postObject.allPublishedPosts);
