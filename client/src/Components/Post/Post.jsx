@@ -1,6 +1,6 @@
 import styles from "../Post/Post.module.css";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { Link, useOutletContext, useParams } from "react-router";
 import Comments from "../Comments/Comments";
 import {
   fetchPostById,
@@ -11,13 +11,13 @@ import {
 const Post = () => {
   const { postId } = useParams();
   const [selectedPost, setPost] = useState(null);
-  const [token] = useState(() => localStorage.getItem("token"));
+  const { token } = useOutletContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetchPostById(postId, token);
-
+        console.log(response);
         if (response.ok === true) {
           const postObject = await response.json();
           setPost(postObject.targetedPost);
@@ -57,36 +57,44 @@ const Post = () => {
     }
   }
 
-  return (
-    <div className={styles.postContainer}>
-      <div className={styles.postContent}>
-        {selectedPost === null ? (
-          <h2>Blog post cannot be found!</h2>
-        ) : (
-          <>
-            <h2>{selectedPost.title}</h2>
-            <h3>
-              {selectedPost.createdAt
-                ? `Created: ${new Date(selectedPost.createdAt).toLocaleString()}`
-                : "No date available"}
-            </h3>
-            <h3>
-              {selectedPost.updatedAt
-                ? `Updated: ${new Date(selectedPost.updatedAt).toLocaleString()}`
-                : "No date available"}
-            </h3>
-            <p>{selectedPost.content}</p>
-            <Comments
-              loggedInUserId={selectedPost.loggedInUserId}
-              comments={selectedPost.comments}
-              onCommentSubmission={handleCommentSubmission}
-              onCommentDeletion={handleCommentDeletion}
-            />
-          </>
-        )}
+  if (token === null) {
+    return (
+      <h2>
+        <Link to="/login">Login to view post!</Link>
+      </h2>
+    );
+  } else {
+    return (
+      <div className={styles.postContainer}>
+        <div className={styles.postContent}>
+          {selectedPost === null ? (
+            <h2>Blog post cannot be found!</h2>
+          ) : (
+            <>
+              <h2>{selectedPost.title}</h2>
+              <h3>
+                {selectedPost.createdAt
+                  ? `Created: ${new Date(selectedPost.createdAt).toLocaleString()}`
+                  : "No date available"}
+              </h3>
+              <h3>
+                {selectedPost.updatedAt
+                  ? `Updated: ${new Date(selectedPost.updatedAt).toLocaleString()}`
+                  : "No date available"}
+              </h3>
+              <p>{selectedPost.content}</p>
+              <Comments
+                loggedInUserId={selectedPost.loggedInUserId}
+                comments={selectedPost.comments}
+                onCommentSubmission={handleCommentSubmission}
+                onCommentDeletion={handleCommentDeletion}
+              />
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default Post;

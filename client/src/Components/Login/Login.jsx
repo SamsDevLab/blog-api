@@ -1,11 +1,12 @@
 import styles from "../Login/Login.module.css";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import { submitLogin } from "../../services/authService";
 import { Link } from "react-router";
 
 const Login = () => {
   const [loginError, setLoginError] = useState(null);
+  const { setToken } = useOutletContext();
   const navigate = useNavigate();
 
   async function handleLogin(formData) {
@@ -17,6 +18,7 @@ const Login = () => {
       setLoginError(result.errorMessage);
     } else if (response.ok === true) {
       localStorage.setItem("token", result.token);
+      setToken(result.token);
       navigate("/");
     }
   }
