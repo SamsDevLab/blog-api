@@ -1,0 +1,19 @@
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  background-color: lightsteelblue;
+  padding: 2rem;
+  max-width: 70%;
+  gap: 1rem;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 0.3rem;
+}
