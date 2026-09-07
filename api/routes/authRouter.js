@@ -14,11 +14,16 @@ router.post("/login", (req, res, next) => {
       const { errorMessage } = info;
       return res.status(400).json({ errorMessage });
     } else {
-      jwt.sign({ user }, process.env.SECRET_KEY, (err, token) => {
-        return res.json({
-          token,
-        });
-      });
+      jwt.sign(
+        { user },
+        process.env.SECRET_KEY,
+        { expiresIn: "15m" },
+        (err, token) => {
+          return res.json({
+            token,
+          });
+        },
+      );
     }
   })(req, res, next);
 });
