@@ -1,26 +1,29 @@
 import styles from "../Login/Login.module.css";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router";
+import { submitLogin } from "../../services/authService";
 
 const Login = () => {
+  const [loginError, setLoginError] = useState(null);
   const navigate = useNavigate();
 
   async function handleLogin(formData) {
     const userData = Object.fromEntries(formData);
-    const response = await fetch("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    const response = await submitLogin(userData);
     const result = await response.json();
-    localStorage.setItem("token", result.token);
-    navigate("/");
+
+    if (response.ok === false) {
+      setLoginError(result.errorMessage);
+    } else if (response.ok === true) {
+      localStorage.setItem("token", result.token);
+      navigate("/");
+    }
   }
 
   return (
     <form action={handleLogin} className={styles.loginForm}>
       <h2>Admin Login</h2>
+      {loginError !== null && <h2>{loginError}</h2>}
       <div className={styles.inputContainer}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" />
