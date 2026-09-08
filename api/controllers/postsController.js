@@ -46,11 +46,10 @@ async function addNewCommentToPost(req, res) {
 }
 
 async function updatePost(req, res) {
-  const { content } = req.body;
+  const dataForUpdate = req.body;
   const { postId } = req.params;
-  const updatePostData = { content, postId };
 
-  const updatedPost = await postsModel.updatePost(updatePostData);
+  const updatedPost = await postsModel.updatePost(dataForUpdate, postId);
 
   res.json({
     updatedPost,

@@ -71,16 +71,12 @@ async function insertPost(newPostData) {
   return newPost;
 }
 
-async function updatePost(updatePostData) {
-  const { postId, content } = updatePostData;
-
+async function updatePost(dataForUpdate, postId) {
   const updatedPost = await prisma.post.update({
     where: {
       id: +postId,
     },
-    data: {
-      content,
-    },
+    data: dataForUpdate,
   });
 
   return updatedPost;
