@@ -1,7 +1,25 @@
 const prisma = require("../lib/prisma");
 
 async function queryAllPosts() {
-  const allPosts = await prisma.post.findMany();
+  const allPosts = await prisma.post.findMany({
+    include: {
+      author: {
+        select: {
+          username: true,
+        },
+      },
+      comments: {
+        include: {
+          author: {
+            select: {
+              username: true,
+            },
+          },
+        },
+      },
+    },
+  });
+
   return allPosts;
 }
 
