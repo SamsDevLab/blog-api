@@ -1,14 +1,19 @@
 import styles from "../Home/Home.module.css";
 import { useState, useEffect } from "react";
+import { getAllPosts, togglePublishedStatus } from "../../services/postService";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:3000/posts");
+      // will need to adjust this fetch to only grab posts the current user authored
+      const response = await getAllPosts();
       const result = await response.json();
-      setPosts(result.allPosts);
+
+      if (response.ok === true) {
+        setPosts(result.allPosts);
+      }
     }
 
     fetchData();
@@ -18,13 +23,11 @@ const Home = () => {
     const reversePublishedStatus = !publishedStatus;
 
     try {
-      const response = await fetch(`http://localhost:3000/posts/${postId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ published: reversePublishedStatus }),
-      });
+      const response = await togglePublishedStatus(
+        postId,
+        reversePublishedStatus,
+      );
+
       if (response.ok === true) {
         const result = await response.json();
         const { updatedPost } = result;
