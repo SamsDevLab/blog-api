@@ -8,15 +8,6 @@ async function queryAllPosts() {
           username: true,
         },
       },
-      comments: {
-        include: {
-          author: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      },
     },
   });
 
