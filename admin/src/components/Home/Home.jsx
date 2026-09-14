@@ -1,14 +1,16 @@
 import styles from "../Home/Home.module.css";
 import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router";
 import { getAllPosts, togglePublishedStatus } from "../../services/postService";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
+  const { token, setToken } = useOutletContext();
 
   useEffect(() => {
     async function fetchData() {
       // will need to adjust this fetch to only grab posts the current user authored
-      const response = await getAllPosts();
+      const response = await getAllPosts(token);
       const result = await response.json();
 
       if (response.ok === true) {
@@ -16,8 +18,10 @@ const Home = () => {
       }
     }
 
-    fetchData();
-  }, []);
+    if (token !== null) {
+      fetchData();
+    }
+  }, [token]);
 
   async function handlePublishedStatus(postId, publishedStatus) {
     const reversePublishedStatus = !publishedStatus;
@@ -46,7 +50,7 @@ const Home = () => {
   return (
     <div>
       {posts === null ? (
-        <h2>No blog posts!</h2>
+        <h2>No blog posts available!</h2>
       ) : (
         posts.map((post) => {
           return (
