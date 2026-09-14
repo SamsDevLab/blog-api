@@ -1,16 +1,18 @@
 import styles from "../Home/Home.module.css";
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router";
-import { getAllPosts, togglePublishedStatus } from "../../services/postService";
+import {
+  getPostsByAuthor,
+  togglePublishedStatus,
+} from "../../services/postService";
 
 const Home = () => {
   const [posts, setPosts] = useState(null);
-  const { token, setToken } = useOutletContext();
+  const { token } = useOutletContext();
 
   useEffect(() => {
     async function fetchData() {
-      // will need to adjust this fetch to only grab posts the current user authored
-      const response = await getAllPosts(token);
+      const response = await getPostsByAuthor(token);
       const result = await response.json();
 
       if (response.ok === true) {

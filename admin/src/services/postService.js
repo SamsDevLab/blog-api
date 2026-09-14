@@ -1,5 +1,11 @@
-async function getAllPosts() {
-  const response = await fetch("http://localhost:3000/posts");
+async function getPostsByAuthor(token) {
+  const response = await fetch("http://localhost:3000/posts", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
   return response;
 }
 
@@ -15,4 +21,4 @@ async function togglePublishedStatus(postId, reversePublishedStatus) {
   return response;
 }
 
-export { getAllPosts, togglePublishedStatus };
+export { getPostsByAuthor, togglePublishedStatus };
