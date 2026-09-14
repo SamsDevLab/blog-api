@@ -1,8 +1,9 @@
 const postsModel = require("../models/postsModel");
 const commentsModel = require("../models/commentsModel");
 
-async function getAllPosts(req, res) {
-  const allPosts = await postsModel.queryAllPosts();
+async function getPostsByAuthor(req, res) {
+  const userId = req.user.id;
+  const allPosts = await postsModel.queryPostsByAuthor(userId);
 
   res.json({
     allPosts,
@@ -68,7 +69,7 @@ async function deletePost(req, res) {
 }
 
 module.exports = {
-  getAllPosts,
+  getPostsByAuthor,
   getAllPublishedPosts,
   getPost,
   createNewPost,

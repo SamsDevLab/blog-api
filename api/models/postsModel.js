@@ -1,17 +1,13 @@
 const prisma = require("../lib/prisma");
 
-async function queryAllPosts() {
-  const allPosts = await prisma.post.findMany({
-    include: {
-      author: {
-        select: {
-          username: true,
-        },
-      },
+async function queryPostsByAuthor(userId) {
+  const allPostsByAuthor = await prisma.post.findMany({
+    where: {
+      authorId: userId,
     },
   });
 
-  return allPosts;
+  return allPostsByAuthor;
 }
 
 async function queryAllPublishedPosts() {
@@ -93,7 +89,7 @@ async function deletePost(postId) {
 }
 
 module.exports = {
-  queryAllPosts,
+  queryPostsByAuthor,
   queryAllPublishedPosts,
   queryPost,
   insertPost,

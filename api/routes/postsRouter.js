@@ -2,7 +2,11 @@ const router = require("express").Router();
 const postsController = require("../controllers/postsController");
 const passport = require("passport");
 
-router.get("/", postsController.getAllPosts);
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  postsController.getPostsByAuthor,
+);
 router.get(
   "/published",
   passport.authenticate("jwt", { session: false }),
