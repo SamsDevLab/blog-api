@@ -1,6 +1,6 @@
 import styles from "../Home/Home.module.css";
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router";
+import { Link, useOutletContext } from "react-router";
 import {
   getPostsByAuthor,
   togglePublishedStatus,
@@ -49,46 +49,54 @@ const Home = () => {
     }
   }
 
-  return (
-    <div>
-      {posts === null ? (
-        <h2>No blog posts available!</h2>
-      ) : (
-        posts.map((post) => {
-          return (
-            <div key={post.id} className={styles.blogPostCard}>
-              <h2>{post.title}</h2>
-              <h3>{new Date(post.createdAt).toLocaleString()}</h3>
-              <p>{post.content}</p>
-              {post.published === true ? (
-                <>
-                  <h3>Published</h3>
-                  <form
-                    action={() =>
-                      handlePublishedStatus(post.id, post.published)
-                    }
-                  >
-                    <button>Unpublish</button>
-                  </form>
-                </>
-              ) : (
-                <>
-                  <h3>Unpublished</h3>
-                  <form
-                    action={() =>
-                      handlePublishedStatus(post.id, post.published)
-                    }
-                  >
-                    <button>Publish</button>
-                  </form>
-                </>
-              )}
-            </div>
-          );
-        })
-      )}
-    </div>
-  );
+  if (token === null) {
+    return (
+      <h2>
+        <Link to="/login">Login to manage posts!</Link>
+      </h2>
+    );
+  } else {
+    return (
+      <div>
+        {posts === null ? (
+          <h2>No blog posts available!</h2>
+        ) : (
+          posts.map((post) => {
+            return (
+              <div key={post.id} className={styles.blogPostCard}>
+                <h2>{post.title}</h2>
+                <h3>{new Date(post.createdAt).toLocaleString()}</h3>
+                <p>{post.content}</p>
+                {post.published === true ? (
+                  <>
+                    <h3>Published</h3>
+                    <form
+                      action={() =>
+                        handlePublishedStatus(post.id, post.published)
+                      }
+                    >
+                      <button>Unpublish</button>
+                    </form>
+                  </>
+                ) : (
+                  <>
+                    <h3>Unpublished</h3>
+                    <form
+                      action={() =>
+                        handlePublishedStatus(post.id, post.published)
+                      }
+                    >
+                      <button>Publish</button>
+                    </form>
+                  </>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
+    );
+  }
 };
 
 export default Home;
