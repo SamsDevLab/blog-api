@@ -22,9 +22,10 @@ module.exports = function (passport) {
             return done(null, false, { errorMessage: "Incorrect password" });
           }
 
-          const { id } = user;
+          const { id, blogAuthor } = user;
+          const targetedUser = { id, blogAuthor };
 
-          return done(null, id);
+          return done(null, targetedUser);
         } catch (error) {
           return done(error);
         }
