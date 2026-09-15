@@ -1,7 +1,11 @@
 import styles from "../Post/Post.module.css";
 import { useState, useEffect } from "react";
-import { Link, useParams, useOutletContext, useOutlet } from "react-router";
-import { fetchPostById } from "../../services/authService";
+import Comments from "../Comments/Comments";
+import { Link, useParams, useOutletContext } from "react-router";
+import {
+  fetchPostById,
+  deleteCommentFromPost,
+} from "../../services/postService";
 
 const Post = () => {
   const { postId } = useParams();
@@ -23,6 +27,19 @@ const Post = () => {
 
     if (token !== null) fetchData();
   }, [postId, token]);
+
+  async function handleCommentDeletion(comment) {
+    try {
+      const response = await deleteCommentFromPost(comment, token);
+      if (response.ok === true) {
+        const result = await response.json();
+        const { updatedPost } = result;
+        setPost(updatedPost);
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
 
   if (token === null) {
     return (
@@ -50,12 +67,13 @@ const Post = () => {
                   : "No date available"}
               </h3>
               <p>{selectedPost.content}</p>
-              {/* <Comments
-                loggedInUserId={selectedPost.loggedInUserId}
+              <Comments
                 comments={selectedPost.comments}
-                onCommentSubmission={handleCommentSubmission}
                 onCommentDeletion={handleCommentDeletion}
-              /> */}
+              />
+              <button>
+                <Link to="/">Back</Link>
+              </button>
             </>
           )}
         </div>
