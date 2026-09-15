@@ -10,7 +10,7 @@ const options = {
 module.exports = function (passport) {
   passport.use(
     new JwtStrategy(options, async (jwtPayload, done) => {
-      const id = jwtPayload.user;
+      const id = jwtPayload.userId;
 
       try {
         const user = await prisma.user.findUnique({
