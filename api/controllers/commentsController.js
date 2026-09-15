@@ -17,7 +17,10 @@ async function deleteComment(req, res) {
   const { authorId } = req.body;
   const loggedInUserId = req.user.id;
 
-  if (loggedInUserId === authorId) {
+  if (req.body.isAdmin) {
+    const updatedPost = await commentsModel.deleteComment(commentId, req);
+    res.json({ updatedPost });
+  } else if (loggedInUserId === authorId) {
     const updatedPost = await commentsModel.deleteComment(commentId, req);
     res.json({ updatedPost });
   } else {

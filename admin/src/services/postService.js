@@ -40,7 +40,7 @@ async function deleteCommentFromPost(comment, token) {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(comment),
+    body: JSON.stringify({ comment, isAdmin: true }),
   });
 
   return response;
