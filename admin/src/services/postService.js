@@ -21,4 +21,34 @@ async function togglePublishedStatus(postId, reversePublishedStatus) {
   return response;
 }
 
-export { getPostsByAuthor, togglePublishedStatus };
+async function fetchPostById(postId, token) {
+  const response = await fetch(`http://localhost:3000/posts/${postId}`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+}
+
+async function deleteCommentFromPost(comment, token) {
+  const response = await fetch(`http://localhost:3000/comments/${comment.id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(comment),
+  });
+
+  return response;
+}
+
+export {
+  getPostsByAuthor,
+  togglePublishedStatus,
+  fetchPostById,
+  deleteCommentFromPost,
+};

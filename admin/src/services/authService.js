@@ -10,16 +10,4 @@ async function submitLogin(userData) {
   return response;
 }
 
-async function fetchPostById(postId, token) {
-  const response = await fetch(`http://localhost:3000/posts/${postId}`, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return response;
-}
-
-export { submitLogin, fetchPostById };
+export { submitLogin };
