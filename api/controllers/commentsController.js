@@ -1,31 +1,27 @@
 const commentsModel = require("../models/commentsModel");
 
-async function editComment(req, res) {
-  const { content, authorId } = req.body;
-  const { commentId } = req.params;
-  const editCommentData = { authorId, commentId, content };
+async function getCommentsByPost(req, res) {
+  const postComments = await commentsModel.queryPostComments(req);
 
-  const updatedComment = await commentsModel.updateComment(editCommentData);
+  res.json({
+    postComments,
+  });
+}
+
+async function editComment(req, res) {
+  const updatedComment = await commentsModel.updateComment(req);
 
   res.json({
     updatedComment,
   });
 }
 
-async function deleteComment(req, res) {
-  const commentId = +req.params.commentId;
-  const { authorId } = req.body;
-  const loggedInUserId = req.user.id;
+async function deleteCommentFromPost(req, res) {
+  const postComments = await commentsModel.deleteComment(req);
 
-  if (req.body.isAdmin) {
-    const updatedPost = await commentsModel.deleteComment(commentId, req);
-    res.json({ updatedPost });
-  } else if (loggedInUserId === authorId) {
-    const updatedPost = await commentsModel.deleteComment(commentId, req);
-    res.json({ updatedPost });
-  } else {
-    res.json("User unauthorized to delete this comment");
-  }
+  res.json({
+    postComments,
+  });
 }
 
-module.exports = { editComment, deleteComment };
+module.exports = { getCommentsByPost, editComment, deleteCommentFromPost };
