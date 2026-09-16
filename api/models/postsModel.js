@@ -29,6 +29,8 @@ async function queryPost(postId, req) {
     select: {
       title: true,
       content: true,
+      id: true,
+      authorId: true,
       author: {
         select: {
           username: true,
@@ -36,15 +38,6 @@ async function queryPost(postId, req) {
       },
       createdAt: true,
       updatedAt: true,
-      comments: {
-        include: {
-          author: {
-            select: {
-              username: true,
-            },
-          },
-        },
-      },
     },
   });
 
