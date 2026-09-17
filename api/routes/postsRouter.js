@@ -19,11 +19,6 @@ router.get(
 );
 
 router.post("/", postsController.createNewPost); // needs a middleware to verify if the user is a blog author or not. if not, this will be rejected
-router.post(
-  "/:postId/comments",
-  passport.authenticate("jwt", { session: false }),
-  postsController.addNewCommentToPost,
-);
 
 router.patch("/:postId", postsController.updatePost); // This option should ONLY be available on the frontend if the req.user's ID is associated with the authorID of the post
 

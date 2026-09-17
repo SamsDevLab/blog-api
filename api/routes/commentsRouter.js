@@ -8,6 +8,12 @@ router.get(
   commentsController.getCommentsByPost,
 );
 
+router.post(
+  "/add/:postId",
+  passport.authenticate("jwt", { session: false }),
+  commentsController.addNewCommentToPost,
+);
+
 router.patch(
   "/:commentId",
   passport.authenticate("jwt", { session: false }),

@@ -8,6 +8,14 @@ async function getCommentsByPost(req, res) {
   });
 }
 
+async function addNewCommentToPost(req, res) {
+  const updatedPost = await commentsModel.insertComment(req);
+
+  res.json({
+    updatedPost,
+  });
+}
+
 async function editComment(req, res) {
   const updatedComment = await commentsModel.updateComment(req);
 
@@ -24,4 +32,9 @@ async function deleteCommentFromPost(req, res) {
   });
 }
 
-module.exports = { getCommentsByPost, editComment, deleteCommentFromPost };
+module.exports = {
+  getCommentsByPost,
+  addNewCommentToPost,
+  editComment,
+  deleteCommentFromPost,
+};

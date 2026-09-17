@@ -1,5 +1,4 @@
 const postsModel = require("../models/postsModel");
-const commentsModel = require("../models/commentsModel");
 
 async function getPostsByAuthor(req, res) {
   const userId = req.user.id;
@@ -38,14 +37,6 @@ async function createNewPost(req, res) {
   });
 }
 
-async function addNewCommentToPost(req, res) {
-  const updatedPost = await commentsModel.insertComment(req);
-
-  res.json({
-    updatedPost,
-  });
-}
-
 async function updatePost(req, res) {
   const dataForUpdate = req.body;
   const { postId } = req.params;
@@ -73,7 +64,6 @@ module.exports = {
   getAllPublishedPosts,
   getPost,
   createNewPost,
-  addNewCommentToPost,
   updatePost,
   deletePost,
 };

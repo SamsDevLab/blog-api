@@ -35,17 +35,14 @@ async function fetchCommentsByPost(postId, token) {
 }
 
 async function addCommentToPost(postId, token, comment) {
-  const response = await fetch(
-    `http://localhost:3000/posts/${postId}/comments`,
-    {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(comment),
+  const response = await fetch(`http://localhost:3000/comments/add/${postId}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-  );
+    body: JSON.stringify(comment),
+  });
 
   return response;
 }
