@@ -4,7 +4,7 @@ const prisma = require("../lib/prisma");
 async function queryPostComments(req) {
   const postId = +req.params.postId;
 
-  const postComments = await prisma.comment.findMany({
+  const comments = await prisma.comment.findMany({
     where: {
       postId,
     },
@@ -16,10 +16,18 @@ async function queryPostComments(req) {
       author: {
         select: {
           username: true,
+          id: true,
         },
       },
     },
   });
+
+  const postComments = comments.map((comment) => {
+    const currentLoggedInUser = req.user.id;
+    return { ...comment, currentLoggedInUser };
+  });
+
+  console.log(postComments);
 
   return postComments;
 }

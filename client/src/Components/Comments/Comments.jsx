@@ -15,7 +15,8 @@ const Comments = ({ token, postId }) => {
       try {
         const response = await fetchCommentsByPost(postId, token);
         if (response.ok === true) {
-          const { postComments } = await response.json();
+          const result = await response.json();
+          const { postComments } = result;
           setComments(postComments);
         }
       } catch (error) {
@@ -32,8 +33,8 @@ const Comments = ({ token, postId }) => {
       const response = await addCommentToPost(postId, token, comment);
       if (response.ok === true) {
         const result = await response.json();
-        const { updatedPost } = result;
-        setPost(updatedPost); // will be setComments
+        // const { updatedPost } = result;
+        // setPost(updatedPost); // will be setComments
       }
     } catch (error) {
       console.error("Error:", error);
@@ -45,15 +46,21 @@ const Comments = ({ token, postId }) => {
       const response = await deleteCommentFromPost(comment, token);
       if (response.ok === true) {
         const result = await response.json();
-        const { updatedPost } = result;
-        setPost(updatedPost);
+        // const { updatedPost } = result;
+        // setPost(updatedPost);
       }
     } catch (error) {
       console.error("Error: ", error);
     }
   }
 
-  if (comments.length === 0) {
+  if (comments === null) {
+    return (
+      <div>
+        <h2>No comments at this time</h2>
+      </div>
+    );
+  } else if (comments.length === 0) {
     return (
       <form action={handleCommentSubmission} className={styles.commentForm}>
         <h3>No comments yet</h3>
@@ -78,7 +85,7 @@ const Comments = ({ token, postId }) => {
               <h3>{comment.author.username}</h3>
               <h4>{`${new Date(comment.createdAt).toLocaleString()}`}</h4>
               <p>{comment.content}</p>
-              {loggedInUserId === comment.authorId && (
+              {comment.currentloggedInUser === comment.author.id && (
                 <form action={() => handleCommentDeletion(comment)}>
                   <button>Delete</button>
                 </form>
@@ -86,8 +93,7 @@ const Comments = ({ token, postId }) => {
             </div>
           );
         })}
-
-        <form action={onCommentSubmission} className={styles.commentForm}>
+        <form action={handleCommentSubmission} className={styles.commentForm}>
           <div className={styles.commentInput}>
             <label htmlFor="comment">Comment on Post</label>
             <input type="textarea" id="comment" name="content" />
