@@ -13,6 +13,11 @@ async function queryPostComments(req) {
       content: true,
       createdAt: true,
       updatedAt: true,
+      post: {
+        select: {
+          authorId: true,
+        },
+      },
       author: {
         select: {
           username: true,
@@ -65,16 +70,23 @@ async function updateComment(req) {
 }
 
 async function deleteComment(req) {
-  const commentId = +req.params.commentId;
-  console.log(req.params);
+  const comment = req.body.comment;
+  const commentId = comment.id;
+  const commentAuthorId = comment.author.id;
+  const postAuthorId = comment.post.authorId;
+  const currentUserId = req.user.id;
+  const isAdmin = req.body.isAdmin;
 
-  const deletedComment = await prisma.comment.delete({
-    where: {
-      id: commentId,
-    },
-  });
+  if (
+    (isAdmin === false && commentAuthorId === currentUserId) ||
+    (isAdmin === true && postAuthorId === currentUserId)
+  ) {
+    const deletedComment = await prisma.comment.delete({
+      where: {
+        id: commentId,
+      },
+    });
 
-  if (req.body.isAdmin) {
     const { postId } = deletedComment;
     const postComments = await prisma.comment.findMany({
       where: {
@@ -92,12 +104,8 @@ async function deleteComment(req) {
         },
       },
     });
-    console.log(postComments);
+
     return postComments;
-  } else {
-    const { postId } = deletedComment;
-    const updatedPost = await postsModel.queryPost(postId, req);
-    return updatedPost;
   }
 }
 

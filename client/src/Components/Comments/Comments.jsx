@@ -46,8 +46,8 @@ const Comments = ({ token, postId }) => {
       const response = await deleteCommentFromPost(comment, token);
       if (response.ok === true) {
         const result = await response.json();
-        // const { updatedPost } = result;
-        // setPost(updatedPost);
+        const { postComments } = result;
+        setComments(postComments);
       }
     } catch (error) {
       console.error("Error: ", error);
@@ -85,7 +85,7 @@ const Comments = ({ token, postId }) => {
               <h3>{comment.author.username}</h3>
               <h4>{`${new Date(comment.createdAt).toLocaleString()}`}</h4>
               <p>{comment.content}</p>
-              {comment.currentloggedInUser === comment.author.id && (
+              {comment.currentLoggedInUser === comment.author.id && (
                 <form action={() => handleCommentDeletion(comment)}>
                   <button>Delete</button>
                 </form>
