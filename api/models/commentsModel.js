@@ -27,8 +27,6 @@ async function queryPostComments(req) {
     return { ...comment, currentLoggedInUser };
   });
 
-  console.log(postComments);
-
   return postComments;
 }
 
