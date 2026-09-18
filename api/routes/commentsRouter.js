@@ -21,7 +21,7 @@ router.patch(
 );
 
 router.delete(
-  "/:commentId",
+  "/delete/:postId",
   passport.authenticate("jwt", { session: false }),
   commentsController.deleteCommentFromPost,
 );

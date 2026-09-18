@@ -10,8 +10,6 @@ import {
 const Comments = ({ token, postId }) => {
   const [comments, setComments] = useState(null);
 
-  // console.log(comments);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,7 +17,6 @@ const Comments = ({ token, postId }) => {
         if (response.ok === true) {
           const result = await response.json();
           const { postComments } = result;
-          console.log(postComments);
           setComments(postComments);
         }
       } catch (error) {
@@ -36,7 +33,6 @@ const Comments = ({ token, postId }) => {
       const response = await addCommentToPost(postId, token, comment);
       if (response.ok === true) {
         const result = await response.json();
-        console.log(result);
         const { postComments } = result;
         setComments(postComments);
       }
@@ -45,10 +41,9 @@ const Comments = ({ token, postId }) => {
     }
   }
 
-  // Currently there is a bug with this where you can delete one comment but have to refresh to delete another comment. Test this after working on the handleCommentSubmission
   async function handleCommentDeletion(comment) {
     try {
-      const response = await deleteCommentFromPost(comment, token);
+      const response = await deleteCommentFromPost(postId, token, comment);
       if (response.ok === true) {
         const result = await response.json();
         const { postComments } = result;

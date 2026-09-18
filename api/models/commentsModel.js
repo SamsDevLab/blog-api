@@ -72,38 +72,22 @@ async function updateComment(req) {
 async function deleteComment(req) {
   const comment = req.body.comment;
   const commentId = comment.id;
+  const isAdmin = req.body.isAdmin;
   const commentAuthorId = comment.author.id;
   const postAuthorId = comment.post.authorId;
   const currentUserId = req.user.id;
-  const isAdmin = req.body.isAdmin;
 
   if (
     (isAdmin === false && commentAuthorId === currentUserId) ||
     (isAdmin === true && postAuthorId === currentUserId)
   ) {
-    const deletedComment = await prisma.comment.delete({
+    await prisma.comment.delete({
       where: {
         id: commentId,
       },
     });
 
-    const { postId } = deletedComment;
-    const postComments = await prisma.comment.findMany({
-      where: {
-        postId,
-      },
-      select: {
-        id: true,
-        content: true,
-        createdAt: true,
-        updatedAt: true,
-        author: {
-          select: {
-            username: true,
-          },
-        },
-      },
-    });
+    const postComments = await queryPostComments(req);
 
     return postComments;
   }
