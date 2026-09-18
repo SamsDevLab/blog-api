@@ -58,15 +58,18 @@ async function editCommentInPost(commentId, editedComment, token) {
   return response;
 }
 
-async function deleteCommentFromPost(comment, token) {
-  const response = await fetch(`http://localhost:3000/comments/${comment.id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`,
+async function deleteCommentFromPost(postId, token, comment) {
+  const response = await fetch(
+    `http://localhost:3000/comments/delete/${postId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ comment, isAdmin: true }),
     },
-    body: JSON.stringify({ comment, isAdmin: true }),
-  });
+  );
 
   return response;
 }
