@@ -1,5 +1,5 @@
 import styles from "../Comments/Comments.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   fetchCommentsByPost,
   editCommentInPost,
