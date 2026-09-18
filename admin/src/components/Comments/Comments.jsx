@@ -1,14 +1,14 @@
 import styles from "../Comments/Comments.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   fetchCommentsByPost,
+  editCommentInPost,
   deleteCommentFromPost,
 } from "../../services/postService";
 
 const Comments = ({ token, postId }) => {
   const [comments, setComments] = useState(null);
-
-  console.log(comments);
+  const [commentToEdit, setCommentToEdit] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,22 +24,28 @@ const Comments = ({ token, postId }) => {
     };
 
     fetchData();
-  }, [postId, token]);
+  }, [postId, token, commentToEdit]);
 
-  // async function handleCommentEdit(formData, commentId) {
-  //   const { editedComment } = Object.fromEntries(formData);
-  //   try {
-  //     const response = await editCommentInPost(commentId, editedComment, token);
-  //     if (response.ok === true) {
-  //       setCommentToEditMode(null);
-  //       const result = await response.json();
-  //       const { updatedPost } = result;
-  //       setPost(updatedPost);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error: ", error);
-  //   }
-  // }
+  function handleEditMode(commentId) {
+    setCommentToEdit(commentId);
+  }
+
+  async function handleCommentEdit(formData) {
+    const { editedComment, commentId } = Object.fromEntries(formData);
+
+    try {
+      const response = await editCommentInPost(
+        +commentId,
+        editedComment,
+        token,
+      );
+      if (response.ok === true) {
+        setCommentToEdit(null);
+      }
+    } catch (error) {
+      console.error("Error: ", error);
+    }
+  }
 
   async function handleCommentDeletion(comment) {
     try {
@@ -65,6 +71,27 @@ const Comments = ({ token, postId }) => {
               <h3>{comment.author.username}</h3>
               <h4>{`${new Date(comment.createdAt).toLocaleString()}`}</h4>
               <p>{comment.content}</p>
+              {commentToEdit === comment.id ? (
+                <form action={handleCommentEdit}>
+                  <label htmlFor="editComment">Edit Comment</label>
+                  <textarea
+                    name="editedComment"
+                    comment={comment.id}
+                    id="editComment"
+                    defaultValue={comment.content}
+                  ></textarea>
+                  <input
+                    type="hidden"
+                    name="commentId"
+                    value={comment.id}
+                  ></input>
+                  <button>Submit</button>
+                </form>
+              ) : (
+                <form action={() => handleEditMode(comment.id)}>
+                  <button>Edit</button>
+                </form>
+              )}
               <form action={() => handleCommentDeletion(comment)}>
                 <button>Delete</button>
               </form>
