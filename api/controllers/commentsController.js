@@ -9,10 +9,10 @@ async function getCommentsByPost(req, res) {
 }
 
 async function addNewCommentToPost(req, res) {
-  const updatedPost = await commentsModel.insertComment(req);
+  const postComments = await commentsModel.insertComment(req);
 
   res.json({
-    updatedPost,
+    postComments,
   });
 }
 

@@ -10,6 +10,8 @@ import {
 const Comments = ({ token, postId }) => {
   const [comments, setComments] = useState(null);
 
+  // console.log(comments);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,6 +19,7 @@ const Comments = ({ token, postId }) => {
         if (response.ok === true) {
           const result = await response.json();
           const { postComments } = result;
+          console.log(postComments);
           setComments(postComments);
         }
       } catch (error) {
@@ -33,14 +36,16 @@ const Comments = ({ token, postId }) => {
       const response = await addCommentToPost(postId, token, comment);
       if (response.ok === true) {
         const result = await response.json();
-        // const { updatedPost } = result;
-        // setPost(updatedPost); // will be setComments
+        console.log(result);
+        const { postComments } = result;
+        setComments(postComments);
       }
     } catch (error) {
       console.error("Error:", error);
     }
   }
 
+  // Currently there is a bug with this where you can delete one comment but have to refresh to delete another comment. Test this after working on the handleCommentSubmission
   async function handleCommentDeletion(comment) {
     try {
       const response = await deleteCommentFromPost(comment, token);
@@ -54,32 +59,12 @@ const Comments = ({ token, postId }) => {
     }
   }
 
-  if (comments === null) {
-    return (
-      <div>
-        <h2>No comments at this time</h2>
-      </div>
-    );
-  } else if (comments.length === 0) {
-    return (
-      <form action={handleCommentSubmission} className={styles.commentForm}>
-        <h3>No comments yet</h3>
-        <div className={styles.commentInput}>
-          <label htmlFor="comment">Comment on Post</label>
-          <input type="textarea" id="comment" name="content" />
-        </div>
-        <div className={styles.commentButtonContainer}>
-          <button>
-            <Link to="/">Back</Link>
-          </button>
-          <button>Submit</button>
-        </div>
-      </form>
-    );
-  } else {
-    return (
-      <div className={styles.commentContainer}>
-        {comments.map((comment) => {
+  return (
+    <div className={styles.commentContainer}>
+      {comments === null || comments.length === 0 ? (
+        <h2>No comments yet</h2>
+      ) : (
+        comments.map((comment) => {
           return (
             <div key={comment.id} className={styles.comment}>
               <h3>{comment.author.username}</h3>
@@ -92,22 +77,22 @@ const Comments = ({ token, postId }) => {
               )}
             </div>
           );
-        })}
-        <form action={handleCommentSubmission} className={styles.commentForm}>
-          <div className={styles.commentInput}>
-            <label htmlFor="comment">Comment on Post</label>
-            <input type="textarea" id="comment" name="content" />
-          </div>
-          <div className={styles.commentButtonContainer}>
-            <button>
-              <Link to="/">Back</Link>
-            </button>
-            <button>Submit</button>
-          </div>
-        </form>
-      </div>
-    );
-  }
+        })
+      )}
+      <form action={handleCommentSubmission} className={styles.commentForm}>
+        <div className={styles.commentInput}>
+          <label htmlFor="comment">Comment on Post</label>
+          <input type="textarea" id="comment" name="content" />
+        </div>
+        <div className={styles.commentButtonContainer}>
+          <button>
+            <Link to="/">Back</Link>
+          </button>
+          <button>Submit</button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 export default Comments;
