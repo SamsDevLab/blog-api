@@ -1,7 +1,15 @@
-import { Link } from "react-router";
 import styles from "../Header/Header.module.css";
+import { Link, useNavigate } from "react-router";
 
-const Header = () => {
+const Header = ({ token, setToken }) => {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setToken(null);
+    navigate("/");
+  }
+
   return (
     <header className={styles.headerContainer}>
       <h1>
@@ -9,12 +17,20 @@ const Header = () => {
       </h1>
       <nav>
         <ul>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/createPost">Create Post</Link>
-          </li>
+          {token == null ? (
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link to="/createPost">Create Post</Link>
+              </li>
+              <li>
+                <button onClick={handleLogout}>Log Out</button>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </header>

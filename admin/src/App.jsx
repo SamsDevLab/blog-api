@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header />
+      <Header token={token} setToken={setToken} />
       <main className="main-content">
         <div className="main-container">
           <Outlet context={{ token, setToken }} />
