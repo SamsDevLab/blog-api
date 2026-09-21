@@ -63,9 +63,34 @@ async function insertPost(req) {
   }
 }
 
+async function updatePublishedStatus(req) {
+  const id = req.body.post.id;
+  const authorId = req.body.post.authorId;
+  const userId = req.user.id;
+  let published = req.body.post.published;
+
+  published === true ? (published = false) : (published = true);
+
+  if (userId === authorId) {
+    await prisma.post.update({
+      where: {
+        id,
+      },
+      data: {
+        published,
+      },
+    });
+
+    const postsByAuthor = await queryPostsByAuthor(userId);
+
+    return postsByAuthor;
+  }
+}
+
 module.exports = {
   queryPostsByAuthor,
   queryAllPublishedPosts,
   queryPost,
   insertPost,
+  updatePublishedStatus,
 };

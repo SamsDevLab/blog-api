@@ -34,9 +34,18 @@ async function addPost(req, res) {
   });
 }
 
+async function updatePublishedStatus(req, res) {
+  const postsByAuthor = await postsModel.updatePublishedStatus(req);
+
+  res.json({
+    postsByAuthor,
+  });
+}
+
 module.exports = {
   getPostsByAuthor,
   getAllPublishedPosts,
   getPost,
   addPost,
+  updatePublishedStatus,
 };
