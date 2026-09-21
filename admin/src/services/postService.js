@@ -1,3 +1,16 @@
+async function addNewPost(token, newPostContent) {
+  const response = await fetch("http://localhost:3000/posts/addPost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ newPostContent }),
+  });
+
+  return response;
+}
+
 async function getPostsByAuthor(token) {
   const response = await fetch("http://localhost:3000/posts", {
     method: "GET",
@@ -75,6 +88,7 @@ async function deleteCommentFromPost(postId, token, comment) {
 }
 
 export {
+  addNewPost,
   getPostsByAuthor,
   togglePublishedStatus,
   fetchPostById,
