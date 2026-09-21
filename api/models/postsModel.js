@@ -46,18 +46,21 @@ async function queryPost(postId, req) {
   return postWithCurrentUser;
 }
 
-async function insertPost(newPostData) {
-  const { authorId, title, content } = newPostData;
+async function insertPost(req) {
+  const { title, content } = req.body.newPostContent;
+  const { id, blogAuthor } = req.user;
 
-  const newPost = await prisma.post.create({
-    data: {
-      authorId: +authorId,
-      title: title,
-      content: content,
-    },
-  });
+  if (blogAuthor === true) {
+    const newPost = await prisma.post.create({
+      data: {
+        authorId: +id,
+        title: title,
+        content: content,
+      },
+    });
 
-  return newPost;
+    return newPost;
+  }
 }
 
 async function updatePost(dataForUpdate, postId) {

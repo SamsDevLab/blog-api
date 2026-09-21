@@ -26,11 +26,8 @@ async function getPost(req, res) {
   });
 }
 
-async function createNewPost(req, res) {
-  const { authorId, content, title } = req.body;
-  const newPostData = { authorId, content, title };
-
-  const newPost = await postsModel.insertPost(newPostData);
+async function addPost(req, res) {
+  const newPost = await postsModel.insertPost(req);
 
   res.json({
     newPost,
@@ -63,7 +60,7 @@ module.exports = {
   getPostsByAuthor,
   getAllPublishedPosts,
   getPost,
-  createNewPost,
+  addPost,
   updatePost,
   deletePost,
 };
