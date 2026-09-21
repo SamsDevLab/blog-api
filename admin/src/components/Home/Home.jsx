@@ -25,24 +25,13 @@ const Home = () => {
     }
   }, [token]);
 
-  async function handlePublishedStatus(postId, publishedStatus) {
-    const reversePublishedStatus = !publishedStatus;
-
+  async function handlePublishedStatus(post) {
     try {
-      const response = await togglePublishedStatus(
-        postId,
-        reversePublishedStatus,
-      );
-
+      const response = await togglePublishedStatus(post, token);
       if (response.ok === true) {
         const result = await response.json();
-        const { updatedPost } = result;
-
-        const newArr = posts.map((post) => {
-          return post.id === updatedPost.id ? updatedPost : post;
-        });
-
-        setPosts(newArr);
+        const { postsByAuthor } = result;
+        setPosts(postsByAuthor);
       }
     } catch (error) {
       console.error(error);
@@ -72,22 +61,14 @@ const Home = () => {
                 {post.published === true ? (
                   <>
                     <h3>Published</h3>
-                    <form
-                      action={() =>
-                        handlePublishedStatus(post.id, post.published)
-                      }
-                    >
+                    <form action={() => handlePublishedStatus(post)}>
                       <button>Unpublish</button>
                     </form>
                   </>
                 ) : (
                   <>
                     <h3>Unpublished</h3>
-                    <form
-                      action={() =>
-                        handlePublishedStatus(post.id, post.published)
-                      }
-                    >
+                    <form action={() => handlePublishedStatus(post)}>
                       <button>Publish</button>
                     </form>
                   </>
