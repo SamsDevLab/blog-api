@@ -1,4 +1,42 @@
 .headerContainer {
   padding: 2rem;
-  background-color: orange;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.mainHeader {
+  font-size: 1.75rem;
+  font-family: "DM Serif";
+  color: #18181b;
+}
+
+.headerLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.headerLink:hover {
+  color: #3730a3;
+}
+
+.navBar {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  align-items: center;
+}
+
+.navButton {
+  text-decoration: none;
+  color: #334155;
+  font-family: "Inter";
+  background: none;
+  border: none;
+}
+
+.navButton:hover {
+  color: #3730a3;
+  cursor: pointer;
 }
