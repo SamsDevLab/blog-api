@@ -24,4 +24,10 @@ router.post(
   postsController.addPost,
 );
 
+router.patch(
+  "/:postId/publish",
+  passport.authenticate("jwt", { session: false }),
+  postsController.updatePublishedStatus,
+);
+
 module.exports = router;
