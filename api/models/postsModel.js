@@ -63,32 +63,9 @@ async function insertPost(req) {
   }
 }
 
-async function updatePost(dataForUpdate, postId) {
-  const updatedPost = await prisma.post.update({
-    where: {
-      id: +postId,
-    },
-    data: dataForUpdate,
-  });
-
-  return updatedPost;
-}
-
-async function deletePost(postId) {
-  const deletedPost = await prisma.post.delete({
-    where: {
-      id: +postId,
-    },
-  });
-
-  return deletedPost;
-}
-
 module.exports = {
   queryPostsByAuthor,
   queryAllPublishedPosts,
   queryPost,
   insertPost,
-  updatePost,
-  deletePost,
 };

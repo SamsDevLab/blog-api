@@ -34,33 +34,9 @@ async function addPost(req, res) {
   });
 }
 
-async function updatePost(req, res) {
-  const dataForUpdate = req.body;
-  const { postId } = req.params;
-
-  const updatedPost = await postsModel.updatePost(dataForUpdate, postId);
-
-  res.json({
-    updatedPost,
-  });
-}
-
-async function deletePost(req, res) {
-  const postId = req.params.postId;
-
-  const deletedPost = await postsModel.deletePost(postId);
-
-  res.json({
-    message: "This post was deleted!",
-    post: deletedPost,
-  });
-}
-
 module.exports = {
   getPostsByAuthor,
   getAllPublishedPosts,
   getPost,
   addPost,
-  updatePost,
-  deletePost,
 };

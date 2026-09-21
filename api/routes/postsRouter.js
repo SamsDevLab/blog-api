@@ -24,8 +24,4 @@ router.post(
   postsController.addPost,
 );
 
-router.patch("/:postId", postsController.updatePost); // This option should ONLY be available on the frontend if the req.user's ID is associated with the authorID of the post
-
-router.delete("/:postId", postsController.deletePost); // This option should ONLY be available on the frontend if the req.user's ID is associated with the authorID of the post
-
 module.exports = router;
