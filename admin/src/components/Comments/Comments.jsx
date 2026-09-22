@@ -30,6 +30,10 @@ const Comments = ({ token, postId }) => {
     setCommentToEdit(commentId);
   }
 
+  function handleCancelEdit() {
+    setCommentToEdit(null);
+  }
+
   async function handleCommentEdit(formData) {
     const { editedComment, commentId } = Object.fromEntries(formData);
 
@@ -70,31 +74,52 @@ const Comments = ({ token, postId }) => {
             <div key={comment.id} className={styles.comment}>
               <h3>{comment.author.username}</h3>
               <h4>{`${new Date(comment.createdAt).toLocaleString()}`}</h4>
-              <p>{comment.content}</p>
               {commentToEdit === comment.id ? (
-                <form action={handleCommentEdit}>
-                  <label htmlFor="editComment">Edit Comment</label>
+                <form action={handleCommentEdit} className={styles.commentForm}>
                   <textarea
                     name="editedComment"
                     comment={comment.id}
                     id="editComment"
                     defaultValue={comment.content}
+                    className={styles.editCommentInput}
                   ></textarea>
                   <input
                     type="hidden"
                     name="commentId"
                     value={comment.id}
                   ></input>
-                  <button>Submit</button>
+                  <div className={styles.commentButtonContainer}>
+                    <button
+                      className={styles.cancelButton}
+                      type="button"
+                      onClick={handleCancelEdit}
+                    >
+                      Cancel
+                    </button>
+                    <button className={styles.submitButton}>Submit</button>
+                  </div>
                 </form>
               ) : (
-                <form action={() => handleEditMode(comment.id)}>
-                  <button>Edit</button>
-                </form>
+                <>
+                  <p>{comment.content}</p>
+                  <div className={styles.commentButtonContainer}>
+                    <button
+                      className={styles.editButton}
+                      onClick={() => handleEditMode(comment.id)}
+                      type="button"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => handleCommentDeletion(comment)}
+                      type="button"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
               )}
-              <form action={() => handleCommentDeletion(comment)}>
-                <button>Delete</button>
-              </form>
             </div>
           );
         })

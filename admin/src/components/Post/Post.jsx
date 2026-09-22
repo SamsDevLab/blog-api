@@ -39,7 +39,7 @@ const Post = () => {
             <h2>Blog post cannot be found!</h2>
           ) : (
             <>
-              <h2>{selectedPost.title}</h2>
+              <h2 className={styles.postHeader}>{selectedPost.title}</h2>
               <h3>
                 {selectedPost.createdAt
                   ? `Created: ${new Date(selectedPost.createdAt).toLocaleString()}`
@@ -52,8 +52,10 @@ const Post = () => {
               </h3>
               <p>{selectedPost.content}</p>
               <Comments token={token} postId={selectedPost.id} />
-              <button>
-                <Link to="/">Back</Link>
+              <button className={styles.backButton}>
+                <Link className={styles.backLink} to="/">
+                  Back
+                </Link>
               </button>
             </>
           )}
