@@ -1,3 +1,21 @@
+.loginContainer {
+  background-color: #ffffff;
+  min-width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.2rem;
+  font-family: "Inter";
+  min-width: 100%;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.loginLink:hover {
+  color: #3730a3;
+}
+
 .cardContainer {
   display: flex;
   flex-direction: column;

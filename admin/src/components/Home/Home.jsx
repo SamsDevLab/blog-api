@@ -40,9 +40,13 @@ const Home = () => {
 
   if (token === null) {
     return (
-      <h2>
-        <Link to="/login">Login to manage posts!</Link>
-      </h2>
+      <div className={styles.loginContainer}>
+        <h2>
+          <Link className={styles.loginLink} to="/login">
+            Login to manage posts!
+          </Link>
+        </h2>
+      </div>
     );
   } else {
     return (

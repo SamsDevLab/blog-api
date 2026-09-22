@@ -24,7 +24,7 @@ const Login = () => {
 
   return (
     <form action={handleLogin} className={styles.loginForm}>
-      <h2>Admin Login</h2>
+      <h2 className={styles.header}>Admin Login</h2>
       {loginError !== null && <h2>{loginError}</h2>}
       <div className={styles.inputContainer}>
         <label htmlFor="email">Email</label>
@@ -35,10 +35,12 @@ const Login = () => {
         <input type="password" id="password" name="password" />
       </div>
       <div className={styles.buttonContainer}>
-        <button>
-          <Link to="/">Back</Link>
+        <Link className={styles.backLink} to="/">
+          Back
+        </Link>
+        <button className={styles.submitButton} type="submit">
+          Submit
         </button>
-        <button type="submit">Submit</button>
       </div>
     </form>
   );
