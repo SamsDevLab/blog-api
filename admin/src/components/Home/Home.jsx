@@ -46,7 +46,7 @@ const Home = () => {
     );
   } else {
     return (
-      <div>
+      <div className={styles.cardContainer}>
         {posts === null ? (
           <h2>No blog posts available!</h2>
         ) : (
@@ -54,24 +54,28 @@ const Home = () => {
             return (
               <div key={post.id} className={styles.blogPostCard}>
                 <h2>
-                  <Link to={`posts/${post.id}`}>{post.title}</Link>
+                  <Link className={styles.cardHeader} to={`posts/${post.id}`}>
+                    {post.title}
+                  </Link>
                 </h2>
                 <h3>{new Date(post.createdAt).toLocaleString()}</h3>
                 <p>{post.content}</p>
                 {post.published === true ? (
-                  <>
-                    <h3>Published</h3>
+                  <div className={styles.publishedStatusContainer}>
+                    <h3 className={styles.publishedBadge}>Published</h3>
                     <form action={() => handlePublishedStatus(post)}>
-                      <button>Unpublish</button>
+                      <button className={styles.unpublishButton}>
+                        Unpublish
+                      </button>
                     </form>
-                  </>
+                  </div>
                 ) : (
-                  <>
-                    <h3>Unpublished</h3>
+                  <div className={styles.publishedStatusContainer}>
+                    <h3 className={styles.draftBadge}>Draft</h3>
                     <form action={() => handlePublishedStatus(post)}>
-                      <button>Publish</button>
+                      <button className={styles.publishButton}>Publish</button>
                     </form>
-                  </>
+                  </div>
                 )}
               </div>
             );

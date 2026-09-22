@@ -1,4 +1,80 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .blogPostCard {
-  background-color: burlywood;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Inter";
+  font-size: 1rem;
+  background-color: #ffffff;
   min-width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.2rem;
+}
+
+.cardHeader {
+  text-decoration: none;
+  font-family: "DM Serif";
+  font-size: 1.25rem;
+  color: #18181b;
+}
+
+.cardHeader:hover {
+  color: #3730a3;
+}
+
+.publishedStatusContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.publishedBadge {
+  background-color: #dcfce7;
+}
+
+.draftBadge {
+  background-color: #fcd34d;
+}
+
+.publishButton {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+.publishButton:hover {
+  background-color: #3730a3;
+}
+
+.publishButton,
+.unpublishButton {
+  border: none;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
+}
+
+.publishButton:hover,
+.unpublishButton:hover {
+  cursor: pointer;
+}
+
+.unpublishButton {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.unpublishButton:hover {
+  background-color: #fee2e2;
+}
+
+.publishedBadge,
+.draftBadge,
+.publishButton,
+.unpublishButton {
+  padding: 0.4rem;
+  border-radius: 0.2rem;
 }
