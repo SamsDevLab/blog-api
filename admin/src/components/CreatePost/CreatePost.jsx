@@ -24,6 +24,7 @@ const CreatePost = () => {
             id="title"
             type="text"
             placeholder="Enter title here..."
+            required
             className={styles.newPostInput}
           />
         </div>
@@ -33,15 +34,14 @@ const CreatePost = () => {
             name="content"
             id="newPost"
             placeholder="Start writing..."
+            required
             className={styles.newPostInput}
           ></textarea>
         </div>
         <div className={styles.buttonContainer}>
-          <button className={styles.backButton}>
-            <Link class={styles.backLink} to="/">
-              Back
-            </Link>
-          </button>
+          <Link class={styles.backLink} to="/">
+            Back
+          </Link>
           <button class={styles.submitButton}>Submit</button>
         </div>
       </form>

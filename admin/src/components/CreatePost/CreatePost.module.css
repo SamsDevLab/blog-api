@@ -26,25 +26,22 @@
   gap: 0.5rem;
 }
 
-.backButton,
+.backLink,
 .submitButton {
   padding: 0.4rem;
   border-radius: 0.2rem;
   border: none;
 }
 
-.backButton {
+.backLink {
+  text-decoration: none;
+  color: inherit;
   background-color: #e2e8f0;
   color: #334155;
 }
 
-.backButton:hover {
+.backLink:hover {
   background-color: #fee2e2;
-}
-
-.backLink {
-  text-decoration: none;
-  color: inherit;
 }
 
 .submitButton {
