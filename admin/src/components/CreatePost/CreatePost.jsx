@@ -15,31 +15,37 @@ const CreatePost = () => {
   }
 
   return (
-    <form action={handleCreatePost} className={styles.newPostForm}>
-      <div className={styles.inputContainer}>
-        <label htmlFor="title">Title</label>
-        <input
-          name="title"
-          id="title"
-          type="text"
-          placeholder="Enter title here..."
-        />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="newPost">Content</label>
-        <textarea
-          name="content"
-          id="newPost"
-          placeholder="Start writing..."
-        ></textarea>
-      </div>
-      <div className={styles.buttonContainer}>
-        <button>
-          <Link to="/">Back</Link>
-        </button>
-        <button>Submit</button>
-      </div>
-    </form>
+    <div className={styles.postContainer}>
+      <form action={handleCreatePost} className={styles.newPostForm}>
+        <div className={styles.inputContainer}>
+          <label htmlFor="title">Title</label>
+          <input
+            name="title"
+            id="title"
+            type="text"
+            placeholder="Enter title here..."
+            className={styles.newPostInput}
+          />
+        </div>
+        <div className={styles.inputContainer}>
+          <label htmlFor="newPost">Content</label>
+          <textarea
+            name="content"
+            id="newPost"
+            placeholder="Start writing..."
+            className={styles.newPostInput}
+          ></textarea>
+        </div>
+        <div className={styles.buttonContainer}>
+          <button className={styles.backButton}>
+            <Link class={styles.backLink} to="/">
+              Back
+            </Link>
+          </button>
+          <button class={styles.submitButton}>Submit</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -1,3 +1,10 @@
+.postContainer {
+  background-color: #ffffff;
+  border-radius: 0.2rem;
+  padding: 1rem;
+  font-family: "Inter";
+}
+
 .newPostForm {
   display: flex;
   flex-direction: column;
@@ -10,7 +17,41 @@
   gap: 0.2rem;
 }
 
+.newPostInput {
+  padding-left: 0.1rem;
+}
+
 .buttonContainer {
   display: flex;
   gap: 0.5rem;
+}
+
+.backButton,
+.submitButton {
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+  border: none;
+}
+
+.backButton {
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.backButton:hover {
+  background-color: #fee2e2;
+}
+
+.backLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.submitButton {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+.submitButton:hover {
+  background-color: #3730a3;
 }
