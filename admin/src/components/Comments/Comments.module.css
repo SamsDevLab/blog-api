@@ -27,7 +27,7 @@
 
 .commentButtonContainer {
   display: flex;
-  gap: 1rem;
+  gap: 0.4rem;
 }
 
 .commentButtonContainer button:hover {
