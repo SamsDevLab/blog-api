@@ -24,6 +24,8 @@ const CreatePost = () => {
             id="title"
             type="text"
             placeholder="Enter title here..."
+            minLength="1"
+            maxLength="100"
             required
             className={styles.newPostInput}
           />
@@ -34,6 +36,8 @@ const CreatePost = () => {
             name="content"
             id="newPost"
             placeholder="Start writing..."
+            minLength="1"
+            maxLength="10000"
             required
             className={styles.newPostInput}
           ></textarea>
