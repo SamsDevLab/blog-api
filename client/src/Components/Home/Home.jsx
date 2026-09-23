@@ -48,13 +48,15 @@ const Home = () => {
           posts.map((post) => {
             return (
               <div key={post.id} className={styles.blogPostCard}>
-                <h2>{post.author.username}</h2>
-                <h2>
-                  {new Date(post.createdAt).toLocaleString("en-us", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </h2>
+                <div className={styles.authorDetails}>
+                  <h2 className={styles.username}>{post.author.username}</h2>
+                  <h2 className={styles.date}>
+                    {new Date(post.createdAt).toLocaleString("en-us", {
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </h2>
+                </div>
                 <h2>
                   <Link className={styles.cardHeader} to={`/posts/${post.id}`}>
                     {post.title}

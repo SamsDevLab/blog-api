@@ -13,6 +13,24 @@
   padding: 1rem;
   font-family: "Inter";
 }
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.username {
+  font-size: 0.8rem;
+}
+
+.username,
+.date {
+  color: #71717a;
+}
+
+.date {
+  font-size: 0.8rem;
+}
 
 .postHeader {
   font-family: "DM Serif";

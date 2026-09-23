@@ -6,6 +6,21 @@
   gap: 0.2rem;
 }
 
+.authorDetails {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  color: #71717a;
+}
+
+.username {
+  font-size: 1rem;
+}
+
+.date {
+  font-size: 0.9rem;
+}
+
 .comment {
   display: flex;
   flex-direction: column;

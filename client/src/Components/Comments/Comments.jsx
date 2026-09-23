@@ -62,8 +62,13 @@ const Comments = ({ token, postId }) => {
         comments.map((comment) => {
           return (
             <div key={comment.id} className={styles.comment}>
-              <h3>{comment.author.username}</h3>
-              <h4>{`${new Date(comment.createdAt).toLocaleString("en-us", { month: "short", day: "numeric" })}`}</h4>
+              <div className={styles.authorDetails}>
+                <h3 className={styles.username}>{comment.author.username}</h3>
+                <h3>∙</h3>
+                <h4
+                  className={styles.date}
+                >{`${new Date(comment.createdAt).toLocaleString("en-us", { month: "short", day: "numeric" })}`}</h4>
+              </div>
               <p>{comment.content}</p>
               {comment.currentLoggedInUser === comment.author.id && (
                 <form action={() => handleCommentDeletion(comment)}>
