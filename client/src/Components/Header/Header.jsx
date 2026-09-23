@@ -11,26 +11,32 @@ const Header = ({ token, setToken }) => {
   }
 
   return (
-    <header className={styles.header}>
-      <h1>
-        <Link to="/">Sam's Dev Blog</Link>
+    <header className={styles.headerContainer}>
+      <h1 className={styles.mainHeader}>
+        <Link className={styles.headerLink} to="/">
+          Sam's Dev Blog
+        </Link>
       </h1>
-      <nav className={styles.navBar}>
+      <nav>
         {token !== null ? (
-          <ul>
+          <ul className={styles.navBar}>
             <li>
               <form action={handleLogout}>
-                <button>Logout</button>
+                <button className={styles.navButton}>Logout</button>
               </form>
             </li>
           </ul>
         ) : (
-          <ul>
+          <ul className={styles.navBar}>
             <li>
-              <Link to="login">Log In</Link>
+              <Link className={styles.navButton} to="login">
+                Log In
+              </Link>
             </li>
             <li>
-              <Link to="signup">Sign Up</Link>
+              <Link className={styles.navButton} to="signup">
+                Sign Up
+              </Link>
             </li>
           </ul>
         )}
