@@ -32,7 +32,7 @@ const Home = () => {
       <div className={styles.loginContainer}>
         <h2>
           <Link className={styles.loginLink} to="/login">
-            Login to manage posts!
+            Login to view posts!
           </Link>
         </h2>
       </div>
