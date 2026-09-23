@@ -14,9 +14,12 @@ const Home = () => {
     async function fetchData() {
       const response = await getPostsByAuthor(token);
       const result = await response.json();
+      const { allPosts } = result;
+
+      allPosts.sort((a, b) => a.id - b.id);
 
       if (response.ok === true) {
-        setPosts(result.allPosts);
+        setPosts(allPosts);
       }
     }
 
@@ -31,6 +34,9 @@ const Home = () => {
       if (response.ok === true) {
         const result = await response.json();
         const { postsByAuthor } = result;
+
+        postsByAuthor.sort((a, b) => a.id - b.id);
+
         setPosts(postsByAuthor);
       }
     } catch (error) {

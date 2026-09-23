@@ -12,8 +12,12 @@ const Home = () => {
       try {
         const response = await fetchAllPublicPosts(token);
         if (response.ok === true) {
-          const postObject = await response.json();
-          setPosts(postObject.allPublishedPosts);
+          const result = await response.json();
+          const { allPublishedPosts } = result;
+
+          allPublishedPosts.sort((a, b) => a.id - b.id);
+
+          setPosts(allPublishedPosts);
         }
       } catch (error) {
         console.error("Error:", error);
