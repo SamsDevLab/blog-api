@@ -40,3 +40,15 @@
   color: #3730a3;
   cursor: pointer;
 }
+
+@media (0px <= width <= 700px) {
+  .headerContainer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .navBar {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+}
