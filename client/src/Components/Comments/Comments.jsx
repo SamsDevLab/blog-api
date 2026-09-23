@@ -79,12 +79,7 @@ const Comments = ({ token, postId }) => {
           <label htmlFor="comment">Comment on Post</label>
           <input type="textarea" id="comment" name="content" />
         </div>
-        <div className={styles.commentButtonContainer}>
-          <button>
-            <Link to="/">Back</Link>
-          </button>
-          <button>Submit</button>
-        </div>
+        <button className={styles.submitButton}>Submit</button>
       </form>
     </div>
   );
