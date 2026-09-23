@@ -39,10 +39,10 @@ const CreatePost = () => {
           ></textarea>
         </div>
         <div className={styles.buttonContainer}>
-          <Link class={styles.backLink} to="/">
+          <Link className={styles.backLink} to="/">
             Back
           </Link>
-          <button class={styles.submitButton}>Submit</button>
+          <button className={styles.submitButton}>Submit</button>
         </div>
       </form>
     </div>
