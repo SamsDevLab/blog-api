@@ -69,7 +69,6 @@ const Home = () => {
                   </Link>
                 </h2>
                 <h3>{new Date(post.createdAt).toLocaleString()}</h3>
-                <p>{post.content}</p>
                 {post.published === true ? (
                   <div className={styles.publishedStatusContainer}>
                     <h3 className={styles.publishedBadge}>Published</h3>
