@@ -7,7 +7,35 @@
 .postContent {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  background-color: whitesmoke;
+  gap: 0.5rem;
+  background-color: #ffffff;
+  border-radius: 0.2rem;
   padding: 1rem;
+  font-family: "Inter";
+}
+
+.postHeader {
+  font-family: "DM Serif";
+  font-size: 1.25rem;
+  color: #18181b;
+}
+
+.backButton {
+  margin-right: auto;
+  text-decoration: none;
+  border: none;
+  padding: 0.4rem;
+  border-radius: 0.2rem;
+  background-color: #e2e8f0;
+  color: #334155;
+}
+
+.backButton:hover {
+  cursor: pointer;
+  background-color: #fee2e2;
+}
+
+.backLink {
+  text-decoration: none;
+  color: inherit;
 }
