@@ -33,6 +33,11 @@
   border: none;
 }
 
+.backLink:hover,
+.submitButton:hover {
+  cursor: pointer;
+}
+
 .backLink {
   text-decoration: none;
   color: inherit;
