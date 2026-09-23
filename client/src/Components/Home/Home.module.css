@@ -1,4 +1,46 @@
+.loginContainer {
+  background-color: #ffffff;
+  min-width: 100%;
+  padding: 1.5rem;
+  border-radius: 0.2rem;
+  font-family: "Inter";
+  min-width: 100%;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.loginLink:hover {
+  color: #3730a3;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .blogPostCard {
-  background-color: white;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: "Inter";
+  font-size: 1rem;
+  background-color: #ffffff;
+  min-width: 100%;
+  padding: 1.25rem;
+  border-radius: 0.2rem;
+}
+
+.cardHeader {
+  text-decoration: none;
+  font-family: "DM Serif";
+  font-size: 1.25rem;
+  color: #18181b;
+}
+
+.cardHeader:hover {
+  color: #3730a3;
 }

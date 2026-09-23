@@ -25,13 +25,17 @@ const Home = () => {
 
   if (token === null) {
     return (
-      <h2>
-        <Link to="/login">Login to view posts!</Link>
-      </h2>
+      <div className={styles.loginContainer}>
+        <h2>
+          <Link className={styles.loginLink} to="/login">
+            Login to manage posts!
+          </Link>
+        </h2>
+      </div>
     );
   } else {
     return (
-      <div>
+      <div className={styles.cardContainer}>
         {posts === null ? (
           <h2>No blog posts at the moment!</h2>
         ) : (
@@ -39,13 +43,11 @@ const Home = () => {
             return (
               <div key={post.id} className={styles.blogPostCard}>
                 <h2>
-                  <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                  <Link className={styles.cardHeader} to={`/posts/${post.id}`}>
+                    {post.title}
+                  </Link>
                 </h2>
-                <h3>
-                  {post.createdAt
-                    ? new Date(post.createdAt).toLocaleString()
-                    : "No date available"}
-                </h3>
+                <h3>{new Date(post.createdAt).toLocaleString()}</h3>
                 <p>{post.content}</p>
               </div>
             );
