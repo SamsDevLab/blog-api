@@ -49,3 +49,17 @@ select {
 #root {
   min-height: 100vh;
 }
+
+@font-face {
+  font-family: "DM Serif";
+  src:
+    url("./assets/blog-api-fonts/DMSerifDisplay-Regular.woff2") format("woff2"),
+    url("./assets/blog-api-fonts/DMSerifDisplay-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Inter";
+  src:
+    url("./assets/blog-api-fonts/Inter18pt-Regular.woff2") format("woff2"),
+    url("./assets/blog-api-fonts/Inter18pt-Regular.woff") format("woff");
+}
