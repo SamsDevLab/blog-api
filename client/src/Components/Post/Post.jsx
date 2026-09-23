@@ -52,11 +52,9 @@ const Post = () => {
               </h3>
               <p>{selectedPost.content}</p>
               <Comments token={token} postId={selectedPost.id} />
-              <button className={styles.backButton}>
-                <Link className={styles.backLink} to="/">
-                  Back
-                </Link>
-              </button>
+              <Link className={styles.backButton} to="/">
+                Back
+              </Link>
             </>
           )}
         </div>
