@@ -3,6 +3,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  background-color: #d3d3d3;
 }
 
 .main-content {
@@ -14,4 +15,5 @@
 .main-container {
   min-width: 45%;
   padding: 1rem;
+  margin: 1rem;
 }
