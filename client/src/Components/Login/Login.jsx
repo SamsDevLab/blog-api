@@ -25,21 +25,21 @@ const Login = () => {
 
   return (
     <form className={styles.loginForm} action={handleLogin}>
-      <h2>Login</h2>
+      <h2 className={styles.header}>Login</h2>
       {loginError !== null && <h3>{loginError}</h3>}
-      <div className={styles.loginInputContainer}>
+      <div className={styles.inputContainer}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" />
       </div>
-      <div className={styles.loginInputContainer}>
+      <div className={styles.inputContainer}>
         <label htmlFor="password">Password</label>
         <input type="password" id="password" name="password" />
       </div>
-      <div className={styles.loginButtonContainer}>
-        <button>
-          <Link to="/">Back</Link>
-        </button>
-        <button>Submit</button>
+      <div className={styles.buttonContainer}>
+        <Link className={styles.backLink} to="/">
+          Back
+        </Link>
+        <button className={styles.submitButton}>Submit</button>
       </div>
     </form>
   );
