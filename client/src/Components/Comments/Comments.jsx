@@ -67,7 +67,7 @@ const Comments = ({ token, postId }) => {
               <p>{comment.content}</p>
               {comment.currentLoggedInUser === comment.author.id && (
                 <form action={() => handleCommentDeletion(comment)}>
-                  <button>Delete</button>
+                  <button className={styles.deleteButton}>Delete</button>
                 </form>
               )}
             </div>

@@ -32,11 +32,29 @@
   gap: 0.3rem;
 }
 
-.submitButton {
+.submitButton,
+.deleteButton {
   padding: 0.4rem;
   border-radius: 0.2rem;
   border: none;
   margin-right: auto;
+}
+
+.submitButton:hover,
+.deleteButton:hover {
+  cursor: pointer;
+}
+
+.deleteButton {
+  background-color: #dc2626;
+  color: #ffffff;
+}
+
+.deleteButton:hover {
+  background-color: #b91c1c;
+}
+
+.submitButton {
   background-color: #4f46e5;
   color: #ffffff;
 }
