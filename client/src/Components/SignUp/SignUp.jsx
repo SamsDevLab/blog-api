@@ -37,22 +37,22 @@ const SignUp = () => {
 
   return (
     <form className={styles.signupForm} action={handleSignup}>
-      <h2>Sign up</h2>
+      <h2 className={styles.header}>Sign up</h2>
       {signupErrors !== null &&
         signupErrors.map((error) => <h3 key={error.path}>{error.msg}</h3>)}
-      <div className={styles.signupInputContainer}>
+      <div className={styles.inputContainer}>
         <label htmlFor="email">Email</label>
         <input type="email" id="email" name="email" />
       </div>
-      <div className={styles.signupInputContainer}>
+      <div className={styles.inputContainer}>
         <label htmlFor="username">Username</label>
         <input type="text" id="username" name="username" />
       </div>
-      <div className={styles.signupInputContainer}>
+      <div className={styles.inputContainer}>
         <label htmlFor="password">Password</label>
         <input type="password" id="password" name="password" />
       </div>
-      <div className={styles.signupInputContainer}>
+      <div className={styles.inputContainer}>
         <label htmlFor="passwordConfirmation">Confirm Password</label>
         <input
           type="password"
@@ -60,11 +60,11 @@ const SignUp = () => {
           name="passwordConfirmation"
         />
       </div>
-      <div className={styles.signupButtonContainer}>
-        <button type="button">
-          <Link to="/">Back</Link>
-        </button>
-        <button>Submit</button>
+      <div className={styles.buttonContainer}>
+        <Link className={styles.backLink} to="/">
+          Back
+        </Link>
+        <button className={styles.submitButton}>Submit</button>
       </div>
     </form>
   );
