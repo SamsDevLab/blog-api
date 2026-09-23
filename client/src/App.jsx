@@ -16,7 +16,7 @@ function App() {
           <Outlet context={{ token, setToken }} />
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
