@@ -63,7 +63,7 @@ const Comments = ({ token, postId }) => {
           return (
             <div key={comment.id} className={styles.comment}>
               <h3>{comment.author.username}</h3>
-              <h4>{`${new Date(comment.createdAt).toLocaleString()}`}</h4>
+              <h4>{`${new Date(comment.createdAt).toLocaleString("en-us", { month: "short", day: "numeric" })}`}</h4>
               <p>{comment.content}</p>
               {comment.currentLoggedInUser === comment.author.id && (
                 <form action={() => handleCommentDeletion(comment)}>

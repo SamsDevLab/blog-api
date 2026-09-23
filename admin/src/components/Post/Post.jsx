@@ -39,17 +39,13 @@ const Post = () => {
             <h2>Blog post cannot be found!</h2>
           ) : (
             <>
-              <h2 className={styles.postHeader}>{selectedPost.title}</h2>
-              <h3>
+              <h2>{selectedPost.author.username}</h2>
+              <h2>
                 {selectedPost.createdAt
-                  ? `Created: ${new Date(selectedPost.createdAt).toLocaleString()}`
+                  ? `${new Date(selectedPost.createdAt).toLocaleString("en-us", { month: "short", day: "numeric" })}`
                   : "No date available"}
-              </h3>
-              <h3>
-                {selectedPost.updatedAt
-                  ? `Updated: ${new Date(selectedPost.updatedAt).toLocaleString()}`
-                  : "No date available"}
-              </h3>
+              </h2>
+              <h2 className={styles.postHeader}>{selectedPost.title}</h2>
               <p>{selectedPost.content}</p>
               <Comments token={token} postId={selectedPost.id} />
               <Link className={styles.backButton} to="/">

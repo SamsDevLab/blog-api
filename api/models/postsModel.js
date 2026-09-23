@@ -5,6 +5,13 @@ async function queryPostsByAuthor(userId) {
     where: {
       authorId: userId,
     },
+    include: {
+      author: {
+        select: {
+          username: true,
+        },
+      },
+    },
   });
 
   return allPostsByAuthor;
@@ -14,6 +21,13 @@ async function queryAllPublishedPosts() {
   const allPublishedPosts = await prisma.post.findMany({
     where: {
       published: true,
+    },
+    include: {
+      author: {
+        select: {
+          username: true,
+        },
+      },
     },
   });
 

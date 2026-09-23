@@ -63,12 +63,18 @@ const Home = () => {
           posts.map((post) => {
             return (
               <div key={post.id} className={styles.blogPostCard}>
+                <h2>{post.author.username}</h2>
+                <h2>
+                  {new Date(post.createdAt).toLocaleString("en-us", {
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </h2>
                 <h2>
                   <Link className={styles.cardHeader} to={`posts/${post.id}`}>
                     {post.title}
                   </Link>
                 </h2>
-                <h3>{new Date(post.createdAt).toLocaleString()}</h3>
                 {post.published === true ? (
                   <div className={styles.publishedStatusContainer}>
                     <h3 className={styles.publishedBadge}>Published</h3>
