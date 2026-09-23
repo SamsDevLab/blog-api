@@ -29,11 +29,11 @@ const Login = () => {
       {loginError !== null && <h3>{loginError}</h3>}
       <div className={styles.inputContainer}>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
+        <input type="email" id="email" name="email" required />
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" />
+        <input type="password" id="password" name="password" required />
       </div>
       <div className={styles.buttonContainer}>
         <Link className={styles.backLink} to="/">

@@ -42,15 +42,15 @@ const SignUp = () => {
         signupErrors.map((error) => <h3 key={error.path}>{error.msg}</h3>)}
       <div className={styles.inputContainer}>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
+        <input type="email" id="email" name="email" required />
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="username">Username</label>
-        <input type="text" id="username" name="username" />
+        <input type="text" id="username" name="username" required />
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" />
+        <input type="password" id="password" name="password" required />
       </div>
       <div className={styles.inputContainer}>
         <label htmlFor="passwordConfirmation">Confirm Password</label>
@@ -58,6 +58,7 @@ const SignUp = () => {
           type="password"
           id="passwordConfirmation"
           name="passwordConfirmation"
+          required
         />
       </div>
       <div className={styles.buttonContainer}>
