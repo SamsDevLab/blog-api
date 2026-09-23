@@ -36,8 +36,10 @@ const Home = () => {
   } else {
     return (
       <div className={styles.cardContainer}>
-        {posts === null ? (
-          <h2>No blog posts at the moment!</h2>
+        {posts === null || posts.length === 0 ? (
+          <h2 className={styles.blogPostCard}>
+            There are no blog posts at this time!
+          </h2>
         ) : (
           posts.map((post) => {
             return (
