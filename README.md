@@ -1,20 +1,36 @@
 # 💻 Blog API
 
-A full-stack application built with React, Node.js, PostgreSQL, Prisma, JWT Tokens, and CSS Modules.
+A full-stack application built with React, Node.js, PostgreSQL, Prisma, JWT, and CSS Modules.
 
-This project was created to learn how to design an API connecting to two, separate, frontend applications as well as to learn how to implement JWT authentication.
+This project was created to learn how to design an API that connects to two separate frontend applications and implement JWT authentication.
 
 ## 🚀 Live Deployment
 
-## ▶️ Demo Account
+API (open this first to allow the server to wake up): https://blog-api-fc47.onrender.com/
+
+Admin Frontend: https://blog-api-lzoj.onrender.com/
+
+Client Frontend: https://blog-api-o1l0.onrender.com/
+
+## ▶️ Demo Accounts
+
+Admin - Can access either Admin or Client
+
+- email: demoadmin@example.com
+- password: adminaccount
+
+Client - Can only access Client
+
+- email: demouser@example.com
+- password: useraccount
 
 ## 📋 Overview
 
-Public-facing, client application allows authenticated users to read and comment on all blog posts. Users are able to delete their own comments.
+The public-facing client application allows users to browse published blog posts, comment on posts, and delete their own comments.
 
-The admin portal is reserved for blog authors. Authors do not have access to each other's posts — only their own. They can delete or edit any comment on their posts.
+The admin portal is reserved for blog authors. Authors can only access and manage their own posts, but can edit or delete any comment on those posts.
 
-Admins can also publish/unpublish their posts with a toggle switch. This switch determines whether or not a post is visible on the public-facing client
+Publishing a post determines whether it is visible on the public-facing client.
 
 ## 👨‍💻 Technologies Used
 
@@ -23,33 +39,54 @@ Admins can also publish/unpublish their posts with a toggle switch. This switch 
 - CSS Modules
 - Node.js
 - Express
-- Express-validator
-- PostgreSQL
 - Prisma
+- PostgreSQL
 - Passport
 - JWT
+- Express Validator
 
 ## ✨ Features
 
 ### Client
 
-- Public, user sign up
-- Comment on all blog posts
-- Users can delete their own comments
+- User registration
+- View published blog posts
+- Comment on blog posts
+- Delete own comments
 
 ### Admin
 
-- Delegated to only blog authors
-- Authors can only view their own blog posts
-- Can create posts, publish/unpublish posts, edit/delete post comments
+- Restricted to blog authors
+- View and manage their own blog posts
+- Create new posts
+- Publish/unpublish posts
+- Edit and delete comments on their posts
 
 ## 👨‍🎓 What I Learned
 
-- How to implement JWT authentication
-- How to build a RESTful API
+- How to design a RESTful API
+- How to implement JWT authentication and authorization
+- How to connect multiple frontend applications to a single API
+- How to use Prisma with PostgreSQL
+- How to structure a full-stack application as a monorepo
+- How to manage authentication state across React applications
 
 ## 🛠️ Future Improvements
 
 - Allow blog authors to delete their posts
 - Add TinyMCE rich text editor to create blog posts
-- Add ability to upgrade user account to a blog author account
+- Allow users to upgrade their account to a blog author account
+
+## 📺 Screenshots
+
+### Admin Dashboard
+
+![alt text](screenshots/admin-dashboard.png)
+
+### Client Dashboard
+
+![alt text](screenshots/client-dashboard.png)
+
+### Post and Comments
+
+![alt text](screenshots/post-and-comments.png)
