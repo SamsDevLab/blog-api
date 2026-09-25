@@ -1,11 +1,14 @@
 async function submitLogin(userData) {
-  const response = await fetch("http://localhost:3000/auth/admin/login", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
+  const response = await fetch(
+    "https://blog-api-fc47.onrender.com/auth/admin/login",
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(userData),
     },
-    body: JSON.stringify(userData),
-  });
+  );
 
   return response;
 }
