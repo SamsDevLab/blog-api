@@ -2,8 +2,9 @@
 
 ## ✨ Features
 
-- MVC pattern
+- MVC architecture
 - Custom user signup validation middleware
 - Custom errorHandler middleware
-- JWT implementation using jsonwebtoken and Passport's JWT Strategy
+- JWT authentication using jsonwebtoken and Passport's JWT Strategy
 - Prisma data modeling
+- RESTful API endpoints for users, posts, and comments
