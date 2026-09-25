@@ -12,7 +12,14 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"] }));
+app.use(
+  cors({
+    origin: [
+      "https://blog-api-lzoj.onrender.com/",
+      "https://blog-api-o1l0.onrender.com/",
+    ],
+  }),
+);
 
 require("./config/passport-local")(passport);
 require("./config/passport-jwt")(passport);
