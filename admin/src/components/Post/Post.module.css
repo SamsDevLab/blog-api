@@ -39,6 +39,10 @@
   color: #18181b;
 }
 
+.content {
+  white-space: pre-line;
+}
+
 .backButton {
   margin-right: auto;
   text-decoration: none;

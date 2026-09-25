@@ -50,7 +50,7 @@ const Post = () => {
                 </h2>
               </div>
               <h2 className={styles.postHeader}>{selectedPost.title}</h2>
-              <p>{selectedPost.content}</p>
+              <p className={styles.content}>{selectedPost.content}</p>
               <Comments token={token} postId={selectedPost.id} />
               <Link className={styles.backButton} to="/">
                 Back
