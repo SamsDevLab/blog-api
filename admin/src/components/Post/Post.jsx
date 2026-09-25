@@ -1,5 +1,5 @@
 import styles from "../Post/Post.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Comments from "../Comments/Comments";
 import { Link, useParams, useOutletContext } from "react-router";
 import { fetchPostById } from "../../services/postService";
