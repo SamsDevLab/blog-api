@@ -15,8 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
     origin: [
-      "https://blog-api-lzoj.onrender.com/",
-      "https://blog-api-o1l0.onrender.com/",
+      "https://blog-api-lzoj.onrender.com",
+      "https://blog-api-o1l0.onrender.com",
     ],
   }),
 );
