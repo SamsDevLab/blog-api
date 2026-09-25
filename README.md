@@ -2,7 +2,7 @@
 
 A full-stack application built with React, Node.js, PostgreSQL, Prisma, JWT Tokens, and CSS Modules.
 
-This project was created to learn how to design an API connecting to two, separate, frontend applications as well as learn how to implement JWT authentication.
+This project was created to learn how to design an API connecting to two, separate, frontend applications as well as to learn how to implement JWT authentication.
 
 ## 🚀 Live Deployment
 
